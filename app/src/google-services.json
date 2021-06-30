@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "622641287597",
+    "project_id": "redsocialtrabajos",
+    "storage_bucket": "redsocialtrabajos.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:622641287597:android:6257c35221cc61e7c91124",
+        "android_client_info": {
+          "package_name": "com.hernan.redsocialdeservicios"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "622641287597-sfagtqvam58k3mdkobub70r001q2or8n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBZbsd4fvJJxO6tWubRcO--CMB4B2BTP7E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "622641287597-sfagtqvam58k3mdkobub70r001q2or8n.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

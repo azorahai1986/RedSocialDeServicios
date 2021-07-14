@@ -21,8 +21,14 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun inflarFragmetLogin(){
-        supportFragmentManager.beginTransaction().replace(R.id.contenedor, LoginFragment())
-            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN).commit()
+        /*
+        supportFragmentManager.beginTransaction().replace(R.id.loginContenedor, LoginFragment())
+            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN).commit()*/
+        val cargarFotoUsuario = CargarFotoPerfilFragment()
+
+        supportFragmentManager?.beginTransaction()
+            ?.replace(R.id.loginContenedor, cargarFotoUsuario)
+            ?.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)?.commit()
     }
 
 

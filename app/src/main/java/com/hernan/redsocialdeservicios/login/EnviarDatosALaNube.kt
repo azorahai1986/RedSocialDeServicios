@@ -9,22 +9,24 @@ class EnviarDatosALaNube {
     fun cargarDatosPersonales(
         email: String,
         uid: String,
+        nombreYApellido:String,
         nombre: String,
-        apellido: String,
+        apellido:String,
+        fotoUsuario:String,
         edad: String,
-        nacimiento: String
     ) {
 
+
         datosPersonales = DatosPersonalesFragment()
-        var exito= "Exito"
         var user = mutableMapOf<String, Any>()
 
         user["email"] = email
         user["uid"] = uid
+        user["nombre y apellido"] = nombreYApellido
         user["nombre"] = nombre
         user["apellido"] = apellido
         user["edad"] = edad
-        user["nacimiento"] = nacimiento
+        user["fotoUsuario"] = fotoUsuario
 
 
         FirebaseFirestore.getInstance().collection("DatosDeUsuarios")
@@ -33,4 +35,6 @@ class EnviarDatosALaNube {
             }
 
     }
+
+
 }

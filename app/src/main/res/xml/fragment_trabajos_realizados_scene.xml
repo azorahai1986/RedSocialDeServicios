@@ -11,7 +11,7 @@
         <Constraint
             android:layout_height="2dp"
             android:layout_width="match_parent"
-            android:id="@+id/imagenUsuario"
+            android:id="@+id/ImagenUsuario"
             app:transitionEasing="linear"
             app:pathMotionArc="flip" />
     </ConstraintSet>
@@ -20,19 +20,19 @@
         app:constraintSetEnd="@id/end"
         app:constraintSetStart="@+id/start"
         app:autoTransition="animateToStart">
-        <OnSwipe app:touchAnchorId="@+id/imagenUsuario"
+        <OnSwipe app:touchAnchorId="@+id/ImagenUsuario"
             app:touchAnchorSide="bottom"/>
         <KeyFrameSet >
             <KeyAttribute
-                app:motionTarget="@+id/imagenUsuario"
+                app:motionTarget="@+id/ImagenUsuario"
                 app:framePosition="100"
                 android:alpha="0" />
             <KeyAttribute
-                app:motionTarget="@+id/imagenUsuario"
+                app:motionTarget="@+id/ImagenUsuario"
                 app:framePosition="100"
                 android:scaleY="0" />
             <KeyAttribute
-                app:motionTarget="@+id/imagenUsuario"
+                app:motionTarget="@+id/ImagenUsuario"
                 app:framePosition="180"
                 android:scaleX="0" />
         </KeyFrameSet>

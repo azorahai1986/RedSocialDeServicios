@@ -21,7 +21,7 @@
     <string name="facebook_app_id">805076137044787</string>
 
     <string name="fb_login_protocol_scheme">fb805076137044787</string>
-
+    <string name="compartirDatos">Google compartirá los datos visualizados en pantalla.</string>
 
 
 </resources>

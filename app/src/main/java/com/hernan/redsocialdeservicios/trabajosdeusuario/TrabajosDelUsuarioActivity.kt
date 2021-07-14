@@ -13,23 +13,16 @@ class TrabajosDelUsuarioActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_trabajos_del_usuario)
 
-        val bundle = intent.extras
-        val email = bundle?.getString("EMAIL")
-        val idUsuario = bundle?.getString("IDUSUARIO")
 
-
-        Log.e("Email recibido", email.toString())
-        Log.e("ID recibido", idUsuario.toString())
-        inflarFragment(email, idUsuario)
+        inflarFragment()
 
     }
 
-    fun inflarFragment(email: String?, idUsuario: String?) {
+    fun inflarFragment() {
 
         fragmentTrabajos = TrabajosRealizadosFragment()
 
-        supportFragmentManager?.beginTransaction()?.replace(R.id.contenedor,
-            TrabajosRealizadosFragment.newInstance(idUsuario.toString(), email.toString()))?.
+        supportFragmentManager?.beginTransaction()?.replace(R.id.loginContenedor, fragmentTrabajos)?.
         setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)?.commit()
     }
 }

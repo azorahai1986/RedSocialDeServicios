@@ -80,8 +80,9 @@ class RegistrarUsuarioFragment : Fragment() {
 
                     Log.e("EMAILREGISTRADO", emailExitoso)
                     Log.e("UIDREGISTRADO", uidDelUsuario)
-                    activity?.supportFragmentManager?.beginTransaction()?.replace(R.id.contenedor,
-                        DatosPersonalesFragment.newInstance(emailExitoso, uidDelUsuario))?.
+                    val datosPersonalesFragment = DatosPersonalesFragment()
+                    activity?.supportFragmentManager?.beginTransaction()?.replace(R.id.loginContenedor,
+                        datosPersonalesFragment)?.
                     setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)?.commit()
 
 

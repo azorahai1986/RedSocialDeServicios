@@ -3,7 +3,6 @@ package com.hernan.redsocialdeservicios.login
 import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -17,6 +16,8 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import com.hernan.redsocialdeservicios.R
 import com.hernan.redsocialdeservicios.databinding.FragmentLoginBinding
 import com.hernan.redsocialdeservicios.trabajosdeusuario.TrabajosDelUsuarioActivity
@@ -36,6 +37,8 @@ class LoginFragment : Fragment() {
     private var param2: String? = null
     //para entrar con google.............
     private val GOOGLE_SIGN_IN = 100
+    private lateinit var auth: FirebaseAuth
+
 
     // calbackManager es una clase de facebook.............
     private val callbackManager = CallbackManager.Factory.create()
@@ -56,6 +59,7 @@ class LoginFragment : Fragment() {
     ): View? {
         binding = FragmentLoginBinding.inflate(inflater, container, false)
 
+
         binding.cardViewRegistrarse.setOnClickListener { fragmentRegistrarse() }
         binding.cardViewGoogle.setOnClickListener { ingresarconGoogle() }
         binding.btAcceder.setOnClickListener {
@@ -73,15 +77,7 @@ class LoginFragment : Fragment() {
     }
 
     companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment LoginFragment.
-         */
-        // TODO: Rename and change types and number of parameters
+
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
             LoginFragment().apply {
@@ -98,6 +94,7 @@ class LoginFragment : Fragment() {
             .signInWithEmailAndPassword(etEmail.toString(), etPassword.toString())
             .addOnCompleteListener {
                 if (it.isSuccessful){
+
                     val intent = Intent(context, TrabajosDelUsuarioActivity::class.java)
                     intent.putExtra("EMAIL", it.result?.user?.email)
                     intent.putExtra("IDUSUARIO", it.result?.user?.uid)
@@ -116,7 +113,7 @@ class LoginFragment : Fragment() {
 
 
     fun fragmentRegistrarse(){
-        activity?.supportFragmentManager?.beginTransaction()?.replace(R.id.contenedor, RegistrarUsuarioFragment())
+        activity?.supportFragmentManager?.beginTransaction()?.replace(R.id.loginContenedor, RegistrarUsuarioFragment())
             ?.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)?.commit()
     }
 
@@ -182,9 +179,13 @@ class LoginFragment : Fragment() {
         googleClient.signOut()
         startActivityForResult(googleClient.signInIntent, GOOGLE_SIGN_IN)
 
+
+
+
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        auth = Firebase.auth
 
         callbackManager.onActivityResult(requestCode, resultCode, data)
         super.onActivityResult(requestCode, resultCode, data)
@@ -199,17 +200,21 @@ class LoginFragment : Fragment() {
                     val credential = GoogleAuthProvider.getCredential(account.idToken, null)
                     FirebaseAuth.getInstance().signInWithCredential(credential).addOnCompleteListener {
                         if (it.isSuccessful){
-                            Log.e("EMAILGOOGLE", account.email ?:"")
-                            Log.e("GOOGLE", ProviderType.GOOGLE.toString())
-                            val intent = Intent(context, TrabajosDelUsuarioActivity::class.java)
-                            intent.putExtra("email", account.email)
-                            intent.putExtra("id", it.result?.user?.uid)
-                            startActivity(intent)
-                            activity?.finish()
+
+                            val email = account.email ?:""
+                            val uidGoogle = auth.currentUser?.uid ?:""
+                            val googleFoto = account.photoUrl.toString()
+
+
+                            val registrarGoogleFragment= RegistrarGoogleFragment()
+                            activity?.supportFragmentManager?.beginTransaction()?.replace(R.id.loginContenedor,
+                                registrarGoogleFragment)?.
+                            setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)?.commit()
                         }else{
 
                         }
                     }
+
 
                 }
 
@@ -218,5 +223,7 @@ class LoginFragment : Fragment() {
             }
 
         }
+
+
     }
 }

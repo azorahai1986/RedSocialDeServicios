@@ -1,11 +1,12 @@
 package com.hernan.redsocialdeservicios.login
 
 import com.google.firebase.firestore.FirebaseFirestore
+import com.hernan.redsocialdeservicios.login.fragments.DatosPersonalesFragment
 
 
 class EnviarDatosALaNube {
 
-    lateinit var datosPersonales:DatosPersonalesFragment
+    lateinit var datosPersonales: DatosPersonalesFragment
     fun cargarDatosPersonales(
         email: String,
         uid: String,

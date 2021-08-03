@@ -22,7 +22,7 @@
 
 
         <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/imagenUsuarioTrabajo"
+            android:id="@+id/imagenUsuarioTrabajos"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:src="@drawable/pajaro"
@@ -42,13 +42,13 @@
             android:textColor="@color/white"
             android:layout_marginTop="10dp"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toEndOf="@id/imagenUsuarioTrabajo"
+            app:layout_constraintStart_toEndOf="@id/imagenUsuarioTrabajos"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toTopOf="@id/imagenItemTrabajo"/>
         <ImageView
             android:id="@+id/imagenItemTrabajo"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="300dp"
             android:src="@drawable/pajaro"
             android:scaleType="fitXY"
             android:layout_marginTop="10dp"

@@ -15,6 +15,7 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.hernan.redsocialdeservicios.databinding.ActivityMainBinding
 import com.hernan.redsocialdeservicios.login.LoginActivity
+import com.hernan.redsocialdeservicios.murogeneral.MuroGeneralActivity
 import com.hernan.redsocialdeservicios.trabajosdeusuario.TrabajosDelUsuarioActivity
 
 class MainActivity : AppCompatActivity() {
@@ -33,6 +34,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         auth = Firebase.auth
 
+        emailObtenido = ""
 
             binding.pasarActividad.setOnClickListener {verificarRegistroUsuario() }
 
@@ -41,7 +43,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun verificarRegistroUsuario() {
-        emailObtenido = "No registrado"
         val user = FirebaseAuth.getInstance().currentUser
         user?.let {
             // Name, email address, and profile photo Url
@@ -51,12 +52,12 @@ class MainActivity : AppCompatActivity() {
 
         }
 
-        if (emailObtenido == "No registrado"){
+        if (emailObtenido.isNullOrEmpty()){
             val intent = Intent(this, LoginActivity::class.java)
 
             startActivity(intent)
         }else{
-            val intent = Intent(this, TrabajosDelUsuarioActivity::class.java)
+            val intent = Intent(this, MuroGeneralActivity::class.java)
             intent.putExtra("EMAIL", emailObtenido)
             intent.putExtra("IDUSUARIO", uidObtenido)
             intent.putExtra("IMAGEN", imagenObtenido)
@@ -65,6 +66,7 @@ class MainActivity : AppCompatActivity() {
 
         Log.e("EMAIL_MAIN", emailObtenido.toString())
         Log.e("ID_MAIN", uidObtenido.toString())
+        Log.e("ID_FOTO", imagenObtenido.toString())
     }
 
 

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".trabajosdeusuario.CargarTrabajoFragment">
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/imagenUserTrabajo"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/pajaro"
+        android:scaleType="fitXY"
+        android:layout_margin="10dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/PagerCargarTrabajo"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/etCargarTrabajo"
+        app:shapeAppearanceOverlay="@style/Circular"/>
+    <EditText
+        android:id="@+id/etCargarTrabajo"
+        app:layout_constraintHorizontal_weight="1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Agrega un comentario"
+        android:textColor="@color/white"
+        android:layout_marginTop="10dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toEndOf="@id/imagenUserTrabajo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/PagerCargarTrabajo"/>
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/PagerCargarTrabajo"
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        android:background="@drawable/imagen_trabajadores"
+        android:scrollbarStyle="insideOverlay"
+        android:layout_marginTop="10dp"
+        app:layout_constraintTop_toBottomOf="@id/etCargarTrabajo"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <Button
+        android:id="@+id/btPublicar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Publicar"
+        android:textColor="@color/white"
+        android:textSize="18dp"
+        app:layout_constraintTop_toBottomOf="@id/PagerCargarTrabajo"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="50dp"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

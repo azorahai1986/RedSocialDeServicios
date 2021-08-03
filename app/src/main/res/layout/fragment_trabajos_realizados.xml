@@ -10,7 +10,7 @@
     <ImageView
         android:id="@+id/ImagenUsuario"
         android:layout_width="match_parent"
-        android:layout_height="300dp"
+        android:layout_height="250dp"
         android:src="@drawable/camara"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -47,6 +47,31 @@
                 android:elevation="10dp"
                 tools:listitem="@layout/item_trabajos_usuario"
                 app:layout_constraintCircleRadius="10dp"/>
+
+            <ImageView
+                android:id="@+id/imagenAgregarTrabajo"
+                android:layout_width="match_parent"
+                android:layout_height="400dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginStart="1dp"
+                android:layout_marginEnd="1dp"
+                android:elevation="5dp"
+                android:src="@drawable/imagen_trabajadores"
+                android:visibility="invisible"/>
+
+            <TextView
+                android:layout_width="5dp"
+                android:layout_height="5dp"
+                android:layout_marginTop="60dp"
+                android:layout_marginStart="20dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:background="@color/rojo"
+                android:elevation="10dp"
+                />
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

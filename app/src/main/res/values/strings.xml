@@ -2,8 +2,8 @@
     <string name="app_name">RedSocialDeServicios</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="texto_encabezado">comentario comentariocomentariocomentario comentario comentariocomentario/n/
-        comentario comentario jbjbkajbjacabkjabsjc  asjjahcjhakahkcj</string>
+    <string name="texto_encabezado">comentario comentar comentariocomentario/n/
+        comentario  asjjahcjhakahkcj</string>
 
 
     <string name="registrate">registrate</string>
@@ -22,6 +22,16 @@
 
     <string name="fb_login_protocol_scheme">fb805076137044787</string>
     <string name="compartirDatos">Google compartirá los datos visualizados en pantalla.</string>
+    <string name="imagen_trabajos">Ahora puedes cargar fotos de tus trabajos, ó cargar una imagen solicitandolo</string>
+    <string name="title_activity_muro_general">MuroGeneralActivity</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
 
 
 </resources>

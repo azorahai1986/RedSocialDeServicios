@@ -1,9 +1,10 @@
-package com.hernan.redsocialdeservicios.trabajosdeusuario
+package com.hernan.redsocialdeservicios.clases
 
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.hernan.redsocialdeservicios.trabajosdeusuario.ModeloTrabajos
 
 class MainViewModel: ViewModel() {
     val repo = repo()
@@ -18,4 +19,16 @@ class MainViewModel: ViewModel() {
         return mutableData
 
     }
+
+    fun UserDataMuro(): LiveData<MutableList<ModeloTrabajos>> {
+        val mutableData = MutableLiveData<MutableList<ModeloTrabajos>>()
+        repo.getUserDataMural().observeForever {
+            mutableData.value = it
+
+        }
+        return mutableData
+
+    }
+
+
 }

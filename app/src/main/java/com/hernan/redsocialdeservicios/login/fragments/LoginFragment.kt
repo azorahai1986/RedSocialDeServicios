@@ -20,6 +20,8 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.hernan.redsocialdeservicios.R
 import com.hernan.redsocialdeservicios.databinding.FragmentLoginBinding
+import com.hernan.redsocialdeservicios.login.fragments.RegistrarGoogleFragment
+import com.hernan.redsocialdeservicios.login.fragments.RegistrarUsuarioFragment
 import com.hernan.redsocialdeservicios.trabajosdeusuario.TrabajosDelUsuarioActivity
 import java.util.regex.Pattern
 
@@ -44,14 +46,6 @@ class LoginFragment : Fragment() {
     private val callbackManager = CallbackManager.Factory.create()
 
 
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
     private lateinit var binding: FragmentLoginBinding
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -74,18 +68,6 @@ class LoginFragment : Fragment() {
 
 
         return binding.root
-    }
-
-    companion object {
-
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            LoginFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
     }
 
     fun ingresarUs(etEmail: Editable, etPassword: Editable) {

@@ -15,7 +15,7 @@
         android:scaleType="fitXY"
         android:layout_marginTop="70dp"
         android:layout_marginStart="30dp"
-        app:shapeAppearanceOverlay="@style/Circular"
+        app:shapeAppearance="@style/Circular"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"/>
 
@@ -24,6 +24,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/redsocial_trabajadores"
+        android:textColor="@color/white"
         android:layout_marginTop="75dp"
         android:layout_marginStart="10dp"
         app:layout_constraintTop_toTopOf="parent"
@@ -32,9 +33,10 @@
     <TextView
         android:id="@+id/textEmailRegistrado"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:text="Hernan@gmail.com"
         android:textStyle="bold"
+        android:background="@color/fondo_text"
         android:textSize="18dp"
         android:gravity="center"
         app:layout_constraintTop_toBottomOf="@id/ImagenRegistrarse"
@@ -45,11 +47,12 @@
     <TextView
         android:id="@+id/textNombreRegistrado"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:text="Fulano de Tal"
         android:textStyle="bold"
         android:textSize="18dp"
         android:gravity="center"
+        android:background="@color/fondo_text"
         android:visibility="invisible"
         android:layout_marginTop="50dp"
         app:layout_constraintTop_toBottomOf="@id/textEmailRegistrado"
@@ -95,24 +98,6 @@
             android:inputType="textPersonName"
             android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
     </com.google.android.material.textfield.TextInputLayout>
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/inputLayoutEdadRegistrar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        app:layout_constraintTop_toBottomOf="@id/inputLayoutApellidoRegistrar"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
-
-        <EditText
-            android:id="@+id/etEdadRegistrar"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:ems="10"
-            android:hint="Edad..."
-            android:inputType="date"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
-    </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
         android:id="@+id/textFechaDeNac"
@@ -120,17 +105,18 @@
         android:layout_height="wrap_content"
         android:text="00/00/0000"
         android:textSize="20dp"
+        android:textColor="@color/white"
         android:layout_marginTop="30dp"
         android:layout_marginStart="80dp"
-        app:layout_constraintTop_toBottomOf="@id/inputLayoutEdadRegistrar"
+        app:layout_constraintTop_toBottomOf="@id/inputLayoutApellidoRegistrar"
         app:layout_constraintStart_toStartOf="parent"/>
     <ImageView
         android:id="@+id/imagenCalendario"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         android:layout_margin="20dp"
         android:src="@drawable/image_calendario"
-        app:layout_constraintTop_toBottomOf="@id/inputLayoutEdadRegistrar"
+        app:layout_constraintTop_toBottomOf="@id/inputLayoutApellidoRegistrar"
         app:layout_constraintStart_toEndOf="@id/textFechaDeNac"
         />
 

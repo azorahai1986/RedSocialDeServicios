@@ -21,4 +21,6 @@ fun onbtenerUser(){
         fotoRecibida = user.photoUrl?.toString()
 
     }
+
+
 }

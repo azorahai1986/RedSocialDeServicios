@@ -1,5 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/herna/AndroidStudioProjects/RedSocialDeServicios/app/src/main/res/drawable/icon_camera.xml" value="1.542857142857143" />
+        <entry key="..\:/Users/herna/AndroidStudioProjects/RedSocialDeServicios/app/src/main/res/layout/activity_main.xml" value="0.5592105263157895" />
+        <entry key="..\:/Users/herna/AndroidStudioProjects/RedSocialDeServicios/app/src/main/res/layout/activity_muro_general.xml" value="0.5592105263157895" />
+        <entry key="..\:/Users/herna/AndroidStudioProjects/RedSocialDeServicios/app/src/main/res/layout/activity_muro_general2.xml" value="1.21875" />
+        <entry key="..\:/Users/herna/AndroidStudioProjects/RedSocialDeServicios/app/src/main/res/layout/activity_trabajos_del_usuario.xml" value="0.6348684210526315" />
+        <entry key="..\:/Users/herna/AndroidStudioProjects/RedSocialDeServicios/app/src/main/res/layout/fragment_editar_usuario.xml" value="1.21875" />
+        <entry key="..\:/Users/herna/AndroidStudioProjects/RedSocialDeServicios/app/src/main/res/layout/fragment_muro_principal.xml" value="1.21875" />
+        <entry key="..\:/Users/herna/AndroidStudioProjects/RedSocialDeServicios/app/src/main/res/layout/fragment_trabajos_realizados.xml" value="0.6017964071856288" />
+        <entry key="..\:/Users/herna/AndroidStudioProjects/RedSocialDeServicios/app/src/main/res/layout/item_muro_principal.xml" value="0.7335766423357665" />
+        <entry key="..\:/Users/herna/AndroidStudioProjects/RedSocialDeServicios/app/src/main/res/layout/item_trabajos_usuario.xml" value="0.5" />
+        <entry key="..\:/Users/herna/AndroidStudioProjects/RedSocialDeServicios/app/src/main/res/layout/toolbar_muro_general.xml" value="0.8607594936708861" />
+        <entry key="..\:/Users/herna/AndroidStudioProjects/RedSocialDeServicios/app/src/main/res/layout/toolbar_trabajos_usuario.xml" value="0.9414634146341463" />
+      </map>
+    </option>
+  </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>

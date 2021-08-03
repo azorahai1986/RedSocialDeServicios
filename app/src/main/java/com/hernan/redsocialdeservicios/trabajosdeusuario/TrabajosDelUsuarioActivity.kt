@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.FragmentTransaction
 import com.hernan.redsocialdeservicios.R
+import kotlinx.android.synthetic.main.toolbar_trabajos_usuario.*
 
 class TrabajosDelUsuarioActivity : AppCompatActivity() {
 
@@ -14,6 +15,7 @@ class TrabajosDelUsuarioActivity : AppCompatActivity() {
         setContentView(R.layout.activity_trabajos_del_usuario)
 
 
+        inflarToolbar()
         inflarFragment()
 
     }
@@ -22,7 +24,14 @@ class TrabajosDelUsuarioActivity : AppCompatActivity() {
 
         fragmentTrabajos = TrabajosRealizadosFragment()
 
-        supportFragmentManager?.beginTransaction()?.replace(R.id.loginContenedor, fragmentTrabajos)?.
+        supportFragmentManager?.beginTransaction()?.replace(R.id.trabajosContenedor, fragmentTrabajos)?.
         setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)?.commit()
+    }
+
+    private fun inflarToolbar(){
+        setSupportActionBar(toolbar_trab_usuario)
+        val actionBar = supportActionBar
+
+
     }
 }

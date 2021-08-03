@@ -1,4 +1,4 @@
-package com.hernan.redsocialdeservicios.login
+package com.hernan.redsocialdeservicios.login.fragments
 
 import android.os.Bundle
 import android.util.Log
@@ -12,6 +12,8 @@ import androidx.fragment.app.FragmentTransaction
 import com.google.firebase.auth.FirebaseAuth
 import com.hernan.redsocialdeservicios.R
 import com.hernan.redsocialdeservicios.databinding.FragmentRegistrarUsuarioBinding
+import com.hernan.redsocialdeservicios.login.ProviderType
+import com.hernan.redsocialdeservicios.login.fragments.DatosPersonalesFragment
 import java.util.regex.Pattern
 
 
@@ -147,4 +149,5 @@ class RegistrarUsuarioFragment : Fragment() {
         Log.e("ERROR", error)
 
     }
+    
 }

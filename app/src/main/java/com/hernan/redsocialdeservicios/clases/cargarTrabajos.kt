@@ -9,17 +9,21 @@ import com.hernan.redsocialdeservicios.trabajosdeusuario.CargarTrabajoFragment
 var dbase = FirebaseFirestore.getInstance()
 val getUser = FirebaseAuth.getInstance().currentUser
 //var arrayData:ArrayList<String> = ArrayList()
-lateinit var fotoPerfilFirebase:String
+var fotoPerfilFirebase:String? = null
+var nombrePerfilFirebase:String? = null
 lateinit var cargar:CargarTrabajoFragment
 public fun dataFirebase(){
     val uid = getUser?.uid.toString()
     cargar = CargarTrabajoFragment()
     fotoPerfilFirebase = ""
+    nombrePerfilFirebase = ""
+
     dbase.collection("DatosDeUsuarios").whereEqualTo("uid", uid).get()
         .addOnSuccessListener { documents ->
             for (document in documents) {
                 //arrayData.add(document.data["fotoUsuario"].toString())
                     fotoPerfilFirebase = document.data["fotoUsuario"].toString()
+                    nombrePerfilFirebase = document.data["nombre"].toString()
 
                 Log.e("U I D", uid.toString())
                 Log.e("FOTO USUARIO", fotoPerfilFirebase.toString())

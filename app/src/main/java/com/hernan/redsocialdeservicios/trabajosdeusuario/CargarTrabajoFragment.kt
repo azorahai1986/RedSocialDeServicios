@@ -68,7 +68,7 @@ class CargarTrabajoFragment : Fragment() {
             var arrayIm = arrayURLs
             var imagenPrincipal = if(arrayURLs.isEmpty()) "" else arrayURLs[0]
             var enunciado = binding.etCargarTrabajo.text.toString()
-            imagenUs = fotoPerfilFirebase
+            imagenUs = fotoPerfilFirebase.toString()
 
 
             var map = mutableMapOf<String, Any>()

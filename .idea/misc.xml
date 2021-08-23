@@ -8,10 +8,13 @@
         <entry key="..\:/Users/herna/AndroidStudioProjects/RedSocialDeServicios/app/src/main/res/layout/activity_muro_general.xml" value="0.5592105263157895" />
         <entry key="..\:/Users/herna/AndroidStudioProjects/RedSocialDeServicios/app/src/main/res/layout/activity_muro_general2.xml" value="1.21875" />
         <entry key="..\:/Users/herna/AndroidStudioProjects/RedSocialDeServicios/app/src/main/res/layout/activity_trabajos_del_usuario.xml" value="0.6348684210526315" />
+        <entry key="..\:/Users/herna/AndroidStudioProjects/RedSocialDeServicios/app/src/main/res/layout/fragment_comentar.xml" value="1.1398026315789473" />
+        <entry key="..\:/Users/herna/AndroidStudioProjects/RedSocialDeServicios/app/src/main/res/layout/fragment_comentarios.xml" value="0.75" />
         <entry key="..\:/Users/herna/AndroidStudioProjects/RedSocialDeServicios/app/src/main/res/layout/fragment_editar_usuario.xml" value="1.21875" />
         <entry key="..\:/Users/herna/AndroidStudioProjects/RedSocialDeServicios/app/src/main/res/layout/fragment_muro_principal.xml" value="1.21875" />
         <entry key="..\:/Users/herna/AndroidStudioProjects/RedSocialDeServicios/app/src/main/res/layout/fragment_trabajos_realizados.xml" value="0.6017964071856288" />
-        <entry key="..\:/Users/herna/AndroidStudioProjects/RedSocialDeServicios/app/src/main/res/layout/item_muro_principal.xml" value="0.7335766423357665" />
+        <entry key="..\:/Users/herna/AndroidStudioProjects/RedSocialDeServicios/app/src/main/res/layout/item_comentarios.xml" value="0.5" />
+        <entry key="..\:/Users/herna/AndroidStudioProjects/RedSocialDeServicios/app/src/main/res/layout/item_muro_principal.xml" value="0.5" />
         <entry key="..\:/Users/herna/AndroidStudioProjects/RedSocialDeServicios/app/src/main/res/layout/item_trabajos_usuario.xml" value="0.5" />
         <entry key="..\:/Users/herna/AndroidStudioProjects/RedSocialDeServicios/app/src/main/res/layout/toolbar_muro_general.xml" value="0.8607594936708861" />
         <entry key="..\:/Users/herna/AndroidStudioProjects/RedSocialDeServicios/app/src/main/res/layout/toolbar_trabajos_usuario.xml" value="0.9414634146341463" />

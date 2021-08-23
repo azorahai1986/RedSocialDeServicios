@@ -1,9 +1,12 @@
 package com.hernan.redsocialdeservicios.murogeneral
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.FragmentActivity
+import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.hernan.redsocialdeservicios.R
@@ -25,10 +28,24 @@ class AdapterMuroPrincipal(var arrayMuro:ArrayList<ModeloTrabajos>, val fragment
         val listDatosMuro = arrayMuro[position]
 
         holder.binding.textItemMuro.text = listDatosMuro.enunciado
-        holder.binding.textComentar.text = listDatosMuro.comentario
-        holder.binding.textLikeMuro.text = listDatosMuro.like
+        holder.binding.textComentarios.text = listDatosMuro.comentario + " comentarios"
+        holder.binding.textLikeMuro.text = listDatosMuro.like + " me gusta"
         Glide.with(fragment).load(listDatosMuro.imagenPrincipal).into(holder.binding.imagenItemMuro)
         Glide.with(fragment).load(listDatosMuro.imagenUsuario).into(holder.binding.imagenUsuarioMuro)
+
+        var idUs = listDatosMuro.id
+
+        holder.binding.textComentarMura.setOnClickListener { comentar(idUs) }
+        holder.binding.imagenItemMuro.setOnClickListener {
+            Toast.makeText(fragment.applicationContext, "$idUs", Toast.LENGTH_SHORT).show()
+            Log.e("I D imagen", idUs)
+        }
+    }
+
+    fun comentar(idDocument: String) {
+        fragment.supportFragmentManager.beginTransaction().replace(R.id.containerMuroGral,
+            comentariosFragment.newInstance(idDocument)).
+                setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN).addToBackStack(null).commit()
     }
 
 

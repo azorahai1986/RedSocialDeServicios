@@ -25,7 +25,7 @@ class AdapterTrabajo(var listTrabajo:ArrayList<ModeloTrabajos>, val fragment:Fra
         val trabajosList = listTrabajo[position]
 
         holder.binding.textItemTrabajo.text = trabajosList.enunciado
-        holder.binding.textComentar.text = trabajosList.comentario
+        holder.binding.textComentarios.text = trabajosList.comentario
         holder.binding.textLike.text = trabajosList.like + "Me gusta"
         Glide.with(fragment).load(trabajosList.imagenPrincipal).into(holder.binding.imagenItemTrabajo)
         Glide.with(fragment).load(trabajosList.imagenUsuario).into(holder.binding.imagenUsuarioTrabajos)

@@ -4,6 +4,8 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.google.firebase.firestore.FirebaseFirestore
+import com.hernan.redsocialdeservicios.murogeneral.ModeloCmentarios
 import com.hernan.redsocialdeservicios.trabajosdeusuario.ModeloTrabajos
 
 class MainViewModel: ViewModel() {
@@ -29,6 +31,20 @@ class MainViewModel: ViewModel() {
         return mutableData
 
     }
+
+    fun userDataComentarios(idUsuario: String): LiveData<MutableList<ModeloCmentarios>> {
+
+        val mutableData = MutableLiveData<MutableList<ModeloCmentarios>>()
+        repo.getComentariosData(idUsuario).observeForever {
+
+
+            mutableData.value = it
+
+        }
+        return mutableData
+
+    }
+
 
 
 }

@@ -19,6 +19,10 @@ import com.hernan.redsocialdeservicios.databinding.FragmentComentariosBinding
 import com.hernan.redsocialdeservicios.murogeneral.clases.IDUSUARIO
 import com.hernan.redsocialdeservicios.murogeneral.clases.SubirComentarios
 import com.hernan.redsocialdeservicios.murogeneral.clases.dataFirebaseTrabajosUsuario
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -58,21 +62,26 @@ class comentariosFragment : Fragment() {
         adapter  = AdapterComentarios(arrayListOf(), context as FragmentActivity)
         binding.recyclerComentarios.adapter = adapter
 
-        binding.btEnviarComentario.setOnClickListener { enviarUnComentario() }
+        binding.btEnviarComentario.setOnClickListener { enviarUnComentario()
+
+        }
 
         observerComentData(arraySnap)
 
         dataFirebaseTrabajosUsuario()
 
 
+
         return binding.root
     }
 
     private fun observerComentData(arraySnap: ModeloCmentarios) {
+
+
         mainViewModel.userDataComentarios(idDocument.toString()).observe(this.viewLifecycleOwner, androidx.lifecycle.Observer {
             adapter?.arrayComentarios =it as ArrayList<ModeloCmentarios>
-            Log.e("Observer coment", it.toString())
-            adapter?.arrayComentarios?.add(arraySnap)
+           // adapter?.arrayComentarios?.add(arraySnap)
+            it.add(arraySnap)
             adapter?.notifyDataSetChanged()
         })
 
@@ -109,35 +118,8 @@ class comentariosFragment : Fragment() {
         }
 
         Log.e("ID TRAB", IDUSUARIO.toString())
-        snap()
     }
     private lateinit var db: FirebaseFirestore
     var arraySnap = ModeloCmentarios()
-    fun snap(){
-        db = FirebaseFirestore.getInstance()
 
-        val docRef = db.collection("comentariosLikes")
-        docRef.addSnapshotListener { snapshot, e ->
-            if (e != null) {
-                return@addSnapshotListener
-            }
-
-            if (snapshot != null && snapshot.documents.isNotEmpty()) {
-                Log.e("SnapShot2 ", snapshot.documents.toString())
-                for (snap in snapshot){
-
-                    var comentariosActializados = snap.data
-                    //arraySnap = comentariosActializados
-                    observerComentData(arraySnap)
-
-                    Log.e("SnapShot4 ", comentariosActializados.toString())
-
-
-                }
-
-            } else {
-                Log.e("SnapShot 3 ", "ERROE DATA")
-            }
-        }
-    }
 }

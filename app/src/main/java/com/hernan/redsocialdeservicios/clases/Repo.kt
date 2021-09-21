@@ -4,13 +4,15 @@ import android.util.Log
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
 import com.hernan.redsocialdeservicios.murogeneral.AdapterComentarios
 import com.hernan.redsocialdeservicios.murogeneral.ModeloCmentarios
+import com.hernan.redsocialdeservicios.murogeneral.clases.SnapshotActializar
 import com.hernan.redsocialdeservicios.murogeneral.comentariosFragment
 import com.hernan.redsocialdeservicios.trabajosdeusuario.ModeloTrabajos
 
-class repo {
+class repo: SnapshotActializar {
     fun getUserData(idUsuario: String): LiveData<MutableList<ModeloTrabajos>> {
         /*
         crearé una variable para enviar el precio a la clase AplicarPorcentajesPrecios
@@ -45,6 +47,7 @@ class repo {
             }
         return mutableData
     }
+
 
     fun getUserDataMural(): LiveData<MutableList<ModeloTrabajos>> {
         /*
@@ -83,7 +86,7 @@ class repo {
         /*
         crearé una variable para enviar el precio a la clase AplicarPorcentajesPrecios
          */
-        Log.e("idRepo", idUsuario.toString())
+
 
         val mutableData = MutableLiveData<MutableList<ModeloCmentarios>>()
         FirebaseFirestore.getInstance().collection("comentariosLikes").whereEqualTo("idDoc", idUsuario)
@@ -112,6 +115,7 @@ class repo {
                 //Esto lo hice para probar si llega internet a la app.
             }
         return mutableData
+
     }
 
 

@@ -7,6 +7,10 @@ import androidx.lifecycle.ViewModel
 import com.google.firebase.firestore.FirebaseFirestore
 import com.hernan.redsocialdeservicios.murogeneral.ModeloCmentarios
 import com.hernan.redsocialdeservicios.trabajosdeusuario.ModeloTrabajos
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 class MainViewModel: ViewModel() {
     val repo = repo()
@@ -33,7 +37,9 @@ class MainViewModel: ViewModel() {
     }
 
     fun userDataComentarios(idUsuario: String): LiveData<MutableList<ModeloCmentarios>> {
-
+        GlobalScope.launch(Dispatchers.IO) {
+            delay(5000L)
+        }
         val mutableData = MutableLiveData<MutableList<ModeloCmentarios>>()
         repo.getComentariosData(idUsuario).observeForever {
 

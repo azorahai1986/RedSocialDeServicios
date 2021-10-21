@@ -1,6 +1,5 @@
 package com.hernan.redsocialdeservicios.murogeneral
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,13 +10,22 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.hernan.redsocialdeservicios.R
 import com.hernan.redsocialdeservicios.databinding.ItemMuroPrincipalBinding
-import com.hernan.redsocialdeservicios.trabajosdeusuario.ModeloTrabajos
+import com.hernan.redsocialdeservicios.trabajosdeusuario.adaptersymodelos.ModeloTrabajos
 
 class AdapterMuroPrincipal(var arrayMuro:ArrayList<ModeloTrabajos>, val fragment: FragmentActivity):RecyclerView
 .Adapter<AdapterMuroPrincipal.ViewHolderMuro>() {
 
     inner class ViewHolderMuro(itemView:View):RecyclerView.ViewHolder(itemView){
         val binding = ItemMuroPrincipalBinding.bind(itemView)
+
+        fun bind(arraMuro: ModeloTrabajos){
+            binding.textItemMuro.text = arraMuro.enunciado
+            binding.textComentarios.text = arraMuro.comentario + " comentarios"
+            binding.textLikeMuro.text = arraMuro.like + " me gusta"
+            binding.textoNombreUser.text = arraMuro.nombreUsuario
+            Glide.with(fragment).load(arraMuro.imagenPrincipal).into(binding.imagenItemMuro)
+            Glide.with(fragment).load(arraMuro.imagenUsuario).into(binding.imagenUsuarioMuro)
+        }
     }
     override fun getItemCount(): Int = arrayMuro.size
 
@@ -27,25 +35,36 @@ class AdapterMuroPrincipal(var arrayMuro:ArrayList<ModeloTrabajos>, val fragment
     override fun onBindViewHolder(holder: ViewHolderMuro, position: Int) {
         val listDatosMuro = arrayMuro[position]
 
-        holder.binding.textItemMuro.text = listDatosMuro.enunciado
-        holder.binding.textComentarios.text = listDatosMuro.comentario + " comentarios"
-        holder.binding.textLikeMuro.text = listDatosMuro.like + " me gusta"
-        Glide.with(fragment).load(listDatosMuro.imagenPrincipal).into(holder.binding.imagenItemMuro)
-        Glide.with(fragment).load(listDatosMuro.imagenUsuario).into(holder.binding.imagenUsuarioMuro)
+
+        holder.bind(listDatosMuro)
 
         var idUs = listDatosMuro.id
 
         holder.binding.textComentarMura.setOnClickListener { comentar(idUs) }
         holder.binding.imagenItemMuro.setOnClickListener {
             Toast.makeText(fragment.applicationContext, "$idUs", Toast.LENGTH_SHORT).show()
-            Log.e("I D imagen", idUs)
         }
+
+        getIndex(muroPrincipal = listDatosMuro)
+
     }
 
     fun comentar(idDocument: String) {
         fragment.supportFragmentManager.beginTransaction().replace(R.id.containerMuroGral,
             comentariosFragment.newInstance(idDocument)).
                 setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN).addToBackStack(null).commit()
+    }
+
+    fun getIndex(muroPrincipal: ModeloTrabajos): Int {
+        var index = -1
+        arrayMuro.forEachIndexed { i, p ->
+            if(muroPrincipal.id == p.id) {
+                index = i
+                return@forEachIndexed
+            }
+        }
+        return index
+
     }
 
 

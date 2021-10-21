@@ -22,6 +22,7 @@ class MuroGeneralActivity : AppCompatActivity() {
         binding = ActivityMuroGeneralBinding.inflate(layoutInflater)
         inflarFragment()
         inflarToolbarMuro()
+
     }
 
     private fun inflarFragment(){

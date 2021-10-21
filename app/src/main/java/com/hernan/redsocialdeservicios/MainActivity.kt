@@ -4,26 +4,20 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.facebook.CallbackManager
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
-import com.hernan.redsocialdeservicios.clases.base.BaseActivity
-import com.hernan.redsocialdeservicios.clases.data.RepoImplement
-import com.hernan.redsocialdeservicios.clases.domain.UserCaseImplement
-import com.hernan.redsocialdeservicios.clases.presentation.viewmodel.MViemodel
-import com.hernan.redsocialdeservicios.clases.presentation.viewmodel.ViewMoselFactory
-import com.hernan.redsocialdeservicios.clases.vo.Resource
 import com.hernan.redsocialdeservicios.databinding.ActivityMainBinding
 import com.hernan.redsocialdeservicios.login.LoginActivity
 import com.hernan.redsocialdeservicios.murogeneral.MuroGeneralActivity
 
 
-class MainActivity : BaseActivity() {
+class MainActivity:AppCompatActivity() {
     // usaré un viewmodel distinto del de siempre para usar orrutinas con el
-    private val viewModel by lazy { ViewModelProvider(this, ViewMoselFactory(UserCaseImplement(RepoImplement()))).get(MViemodel::class.java) }
     private lateinit var binding:ActivityMainBinding
     private lateinit var auth: FirebaseAuth
     private val callbackManager = CallbackManager.Factory.create()
@@ -40,30 +34,13 @@ class MainActivity : BaseActivity() {
 
         emailObtenido = ""
 
-        observeData()
+        //observeData()
+
+
             binding.pasarActividad.setOnClickListener {verificarRegistroUsuario() }
 
 
 
-    }
-
-    override fun getViewId(): Int = R.layout.activity_main
-    private fun observeData(){
-        viewModel.fetcVersion.observe(this, Observer { result: Resource<Int> ->
-            when(result){
-                is Resource.Loading ->{
-                    showProgress()
-                }
-                is Resource.Success ->{
-                    binding.textVersion.text = result.data.toString()
-                    hideProgress()
-                }
-                is Resource.Failure ->{
-                    Toast.makeText(this, "error ${result.exception.message}", Toast.LENGTH_SHORT).show()
-                }
-            }
-
-        })
     }
 
     fun verificarRegistroUsuario() {

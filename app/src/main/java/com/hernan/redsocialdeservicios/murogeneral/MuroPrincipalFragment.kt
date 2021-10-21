@@ -1,41 +1,34 @@
 package com.hernan.redsocialdeservicios.murogeneral
 
+import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.GridLayout
 import androidx.fragment.app.FragmentActivity
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.hernan.redsocialdeservicios.R
-import com.hernan.redsocialdeservicios.clases.MainViewModel
+import com.google.firebase.auth.FirebaseAuth
 import com.hernan.redsocialdeservicios.databinding.FragmentMuroPrincipalBinding
-import com.hernan.redsocialdeservicios.trabajosdeusuario.AdapterTrabajo
-import com.hernan.redsocialdeservicios.trabajosdeusuario.ModeloTrabajos
-
-
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+import com.hernan.redsocialdeservicios.murogeneral.encabezado.adapters_y_modelos.AdapterEncabezado
+import com.hernan.redsocialdeservicios.murogeneral.clasesmuro.MuroViewModel
+import com.hernan.redsocialdeservicios.murogeneral.encabezado.adapters_y_modelos.ModeloEncabezado
+import com.hernan.redsocialdeservicios.murogeneral.encabezado.firebase.EncabezadoViewModel
+import com.hernan.redsocialdeservicios.trabajosdeusuario.adaptersymodelos.ModeloTrabajos
 
 
 class MuroPrincipalFragment : Fragment() {
     var layoutManager: RecyclerView.LayoutManager? = null
     private var adapter: AdapterMuroPrincipal? = null
-    private val muroViewModel by lazy { ViewModelProviders.of(this).get(MainViewModel::class.java) }
-    private var param1: String? = null
-    private var param2: String? = null
+    private var adapterEncabezado: AdapterEncabezado? = null
+    private val viewModel: MuroViewModel by viewModels()
+    private val viewModelEncabezado: EncabezadoViewModel by viewModels()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    var getUser = FirebaseAuth.getInstance().currentUser
 
     private lateinit var binding:FragmentMuroPrincipalBinding
     override fun onCreateView(
@@ -45,20 +38,12 @@ class MuroPrincipalFragment : Fragment() {
         binding = FragmentMuroPrincipalBinding.inflate(inflater, container, false)
 
         inflarRecyclerMuro()
-        obtenerDataMuro()
+        inflarRecyclerEncabezado()
+        initObserverrs()
+        initObserverrEncabezado()
         return binding.root
     }
 
-    companion object {
-
-        fun newInstance(param1: String, param2: String) =
-            MuroPrincipalFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
-    }
     private fun inflarRecyclerMuro(){
         layoutManager = GridLayoutManager(activity, 1)
         binding.recyclerMuroPrincipal.layoutManager = layoutManager
@@ -67,10 +52,92 @@ class MuroPrincipalFragment : Fragment() {
         binding.recyclerMuroPrincipal.adapter = adapter
 
     }
-    fun obtenerDataMuro(){
-        muroViewModel.UserDataMuro().observe(this.viewLifecycleOwner, Observer{
-            adapter?.arrayMuro = it as ArrayList<ModeloTrabajos>
-            adapter?.notifyDataSetChanged()
-        })
+
+    private fun inflarRecyclerEncabezado(){
+        layoutManager = LinearLayoutManager(activity,  RecyclerView.HORIZONTAL, false)
+        binding.rcyclerEncabezado.layoutManager = layoutManager
+        binding.rcyclerEncabezado.setHasFixedSize(true)
+        adapterEncabezado = AdapterEncabezado(arrayListOf(), context as FragmentActivity)
+        binding.rcyclerEncabezado.adapter = adapterEncabezado
     }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        removeObservers()
+        removeObserversEncabezado()
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    private fun initObserverrs() {
+        viewModel.muro.observe(viewLifecycleOwner) {
+            //Log.e("PRueba", it.texto.toString())
+            when(it.type) {
+                ModeloTrabajos.TYPE.ADD -> adapter?.arrayMuro?.add(it)
+                ModeloTrabajos.TYPE.UPDATE -> {
+                    val pos = adapter?.getIndex(it)
+                    if(pos!=null && pos > -1) {
+                        adapter?.arrayMuro?.set(pos, it)
+                    }
+                }
+                ModeloTrabajos.TYPE.REMOVE -> {
+                    val pos = adapter?.getIndex(it)
+                    if(pos!=null && pos > -1) {
+                        adapter?.arrayMuro?.removeAt(pos)
+                    }
+                }
+            }
+
+            adapter?.notifyDataSetChanged()
+
+        }
+
+
+        viewModel.error.observe(viewLifecycleOwner) {
+            Log.e("ErrorPrueba", it.toString())
+        }
+
+        viewModel.getMuro()
+    }
+
+    private fun removeObservers() {
+        viewModel.muro.removeObservers(this)
+        viewModel.error.removeObservers(this)
+        viewModel.removeListener()
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    private fun initObserverrEncabezado() {
+        viewModelEncabezado.encabezado.observe(viewLifecycleOwner) {
+            //Log.e("PRueba", it.texto.toString())
+            when(it.type) {
+                ModeloEncabezado.TYPE.ADD -> adapterEncabezado?.arrayEncabezado?.add(it)
+                ModeloEncabezado.TYPE.UPDATE -> {
+                    val pos = adapterEncabezado?.getIndex(it)
+                    if(pos!=null && pos > -1) {
+                        adapterEncabezado?.arrayEncabezado?.set(pos, it)
+                    }
+                }
+                ModeloEncabezado.TYPE.REMOVE -> {
+                    val pos = adapterEncabezado?.getIndex(it)
+                    if(pos!=null && pos > -1) {
+                        adapterEncabezado?.arrayEncabezado?.removeAt(pos)
+                    }
+                }
+            }
+
+            adapterEncabezado?.notifyDataSetChanged()
+
+        }
+        viewModelEncabezado.error.observe(viewLifecycleOwner) {
+            Log.e("ErrorPrueba", it.toString())
+        }
+
+        viewModelEncabezado.getEncabezado()
+    }
+    private fun removeObserversEncabezado() {
+        viewModelEncabezado.encabezado.removeObservers(this)
+        viewModelEncabezado.error.removeObservers(this)
+        viewModelEncabezado.removeListener()
+    }
+
 }

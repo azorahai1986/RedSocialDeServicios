@@ -15,16 +15,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentTransaction
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import com.google.firebase.storage.ktx.storage
-import com.hernan.redsocialdeservicios.R
 import com.hernan.redsocialdeservicios.databinding.FragmentCargarFotoPerfilBinding
-import com.hernan.redsocialdeservicios.trabajosdeusuario.TrabajosRealizadosFragment
+import com.hernan.redsocialdeservicios.murogeneral.MuroGeneralActivity
 import java.util.*
 
 
@@ -159,8 +157,10 @@ class CargarFotoPerfilFragment : Fragment() {
                     editar.update(map)
                         .addOnSuccessListener {
                             Toast.makeText(context, "Usuario registrado con exito", Toast.LENGTH_SHORT) .show()
-                            activity?.supportFragmentManager?.beginTransaction()?.replace(R.id.loginContenedor,
-                                TrabajosRealizadosFragment())?.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)?.commit()
+                            /*activity?.supportFragmentManager?.beginTransaction()?.replace(R.id.loginContenedor,
+                                MuroPrincipalFragment())?.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)?.commit()*/
+                            val intent = Intent(context, MuroGeneralActivity::class.java)
+                            startActivity(intent)
 
                             progressDialog.dismiss()
                         }.addOnFailureListener {

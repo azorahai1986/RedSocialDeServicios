@@ -23,14 +23,25 @@
 
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/imagenUsuarioMuro"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
                 android:src="@drawable/pajaro"
                 android:scaleType="fitXY"
                 android:layout_margin="10dp"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:shapeAppearanceOverlay="@style/Circular"/>
+
+            <TextView
+                android:id="@+id/texto_nombre_user"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="fulano de tal"
+                android:textColor="@color/white"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toEndOf="@id/imagenUsuarioMuro"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="15dp"/>
             <TextView
                 android:id="@+id/textItemMuro"
                 app:layout_constraintHorizontal_weight="1"
@@ -42,16 +53,17 @@
                 app:layout_constraintTop_toBottomOf="@id/imagenUsuarioMuro"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"/>
-            <ImageView
+
+            <com.zolad.zoominimageview.ZoomInImageView
                 android:id="@+id/imagenItemMuro"
                 android:layout_width="match_parent"
-                android:layout_height="300dp"
+                android:layout_height="wrap_content"
                 android:src="@drawable/pajaro"
                 android:scaleType="fitXY"
                 android:layout_marginTop="10dp"
                 app:layout_constraintTop_toBottomOf="@id/textItemMuro"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent" />
+                app:layout_constraintEnd_toEndOf="parent"/>
 
             <TextView
                 android:id="@+id/textLikeMuro"

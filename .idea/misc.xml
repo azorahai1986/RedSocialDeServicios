@@ -8,13 +8,20 @@
         <entry key="..\:/Users/herna/AndroidStudioProjects/RedSocialDeServicios/app/src/main/res/layout/activity_muro_general.xml" value="0.5592105263157895" />
         <entry key="..\:/Users/herna/AndroidStudioProjects/RedSocialDeServicios/app/src/main/res/layout/activity_muro_general2.xml" value="1.21875" />
         <entry key="..\:/Users/herna/AndroidStudioProjects/RedSocialDeServicios/app/src/main/res/layout/activity_trabajos_del_usuario.xml" value="0.6348684210526315" />
+        <entry key="..\:/Users/herna/AndroidStudioProjects/RedSocialDeServicios/app/src/main/res/layout/appbar_scrolleable.xml" value="1.105263157894737" />
+        <entry key="..\:/Users/herna/AndroidStudioProjects/RedSocialDeServicios/app/src/main/res/layout/fragment_cargar_trabajo.xml" value="0.48848684210526316" />
         <entry key="..\:/Users/herna/AndroidStudioProjects/RedSocialDeServicios/app/src/main/res/layout/fragment_comentar.xml" value="1.1398026315789473" />
         <entry key="..\:/Users/herna/AndroidStudioProjects/RedSocialDeServicios/app/src/main/res/layout/fragment_comentarios.xml" value="0.75" />
+        <entry key="..\:/Users/herna/AndroidStudioProjects/RedSocialDeServicios/app/src/main/res/layout/fragment_datos_personales.xml" value="0.7088815789473685" />
         <entry key="..\:/Users/herna/AndroidStudioProjects/RedSocialDeServicios/app/src/main/res/layout/fragment_editar_usuario.xml" value="1.21875" />
-        <entry key="..\:/Users/herna/AndroidStudioProjects/RedSocialDeServicios/app/src/main/res/layout/fragment_muro_principal.xml" value="1.21875" />
-        <entry key="..\:/Users/herna/AndroidStudioProjects/RedSocialDeServicios/app/src/main/res/layout/fragment_trabajos_realizados.xml" value="0.6017964071856288" />
+        <entry key="..\:/Users/herna/AndroidStudioProjects/RedSocialDeServicios/app/src/main/res/layout/fragment_imagenes_zoom.xml" value="0.5444078947368421" />
+        <entry key="..\:/Users/herna/AndroidStudioProjects/RedSocialDeServicios/app/src/main/res/layout/fragment_muro_principal.xml" value="0.9269005847953217" />
+        <entry key="..\:/Users/herna/AndroidStudioProjects/RedSocialDeServicios/app/src/main/res/layout/fragment_trabajos_realizados.xml" value="0.28013937282229967" />
         <entry key="..\:/Users/herna/AndroidStudioProjects/RedSocialDeServicios/app/src/main/res/layout/item_comentarios.xml" value="0.5" />
+        <entry key="..\:/Users/herna/AndroidStudioProjects/RedSocialDeServicios/app/src/main/res/layout/item_encabezado.xml" value="1.087171052631579" />
+        <entry key="..\:/Users/herna/AndroidStudioProjects/RedSocialDeServicios/app/src/main/res/layout/item_imagenescrear.xml" value="0.48848684210526316" />
         <entry key="..\:/Users/herna/AndroidStudioProjects/RedSocialDeServicios/app/src/main/res/layout/item_muro_principal.xml" value="0.5" />
+        <entry key="..\:/Users/herna/AndroidStudioProjects/RedSocialDeServicios/app/src/main/res/layout/item_pager_zoom.xml" value="0.5444078947368421" />
         <entry key="..\:/Users/herna/AndroidStudioProjects/RedSocialDeServicios/app/src/main/res/layout/item_trabajos_usuario.xml" value="0.5" />
         <entry key="..\:/Users/herna/AndroidStudioProjects/RedSocialDeServicios/app/src/main/res/layout/toolbar_muro_general.xml" value="0.8607594936708861" />
         <entry key="..\:/Users/herna/AndroidStudioProjects/RedSocialDeServicios/app/src/main/res/layout/toolbar_trabajos_usuario.xml" value="0.9414634146341463" />

@@ -12,6 +12,7 @@ import androidx.fragment.app.FragmentTransaction
 import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
 import com.hernan.redsocialdeservicios.R
+import com.hernan.redsocialdeservicios.clases.nombrePerfilFirebase
 import com.hernan.redsocialdeservicios.databinding.FragmentDatosPersonalesBinding
 import com.hernan.redsocialdeservicios.login.EnviarDatosALaNube
 import com.hernan.redsocialdeservicios.trabajosdeusuario.TrabajosDelUsuarioActivity
@@ -60,13 +61,14 @@ class DatosPersonalesFragment : Fragment() {
                 binding.inputLayoutNombreRegistrar.visibility = View.INVISIBLE
                 binding.textNombreRegistrado.visibility = View.VISIBLE
                 binding.inputLayoutApellidoRegistrar.visibility = View.INVISIBLE
-                Log.e("Nombre y Apellido", nombreYApellido.toString())
+                Log.e("Nombre y Apellido google", nombreYApellido.toString())
 
             }
             getUser?.displayName.isNullOrEmpty()->{
             binding.inputLayoutNombreRegistrar.visibility = View.VISIBLE
             binding.textNombreRegistrado.visibility = View.INVISIBLE
             binding.inputLayoutApellidoRegistrar.visibility = View.VISIBLE
+
 
             }
 
@@ -116,10 +118,16 @@ class DatosPersonalesFragment : Fragment() {
 
     fun cargarDatosUsuarioFirebase(){
         Log.e("Nombre y Apellido2", nombreYApellido.toString())
+        if (nombreYApellido.isNullOrEmpty()){
+            nombreYApellido = binding.etNombreRegistrar.text.toString()+ " " + binding.etApellidoRegistrar.text.toString()
+
+            Log.e("Nombre y Apellido3 ", nombreYApellido.toString())
+
+        }
         enviarDatos.cargarDatosPersonales(getUser?.email.toString(), getUser?.uid.toString(),
-            nombreYApellido.toString(), binding.etNombreRegistrar.text.toString(),
-            binding.etApellidoRegistrar.text.toString(), getUser?.photoUrl.toString(),
+            nombreYApellido.toString(), getUser?.photoUrl.toString(),
             binding.textFechaDeNac.text.toString())
+
     }
 
 

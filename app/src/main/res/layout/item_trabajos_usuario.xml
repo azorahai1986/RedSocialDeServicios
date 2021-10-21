@@ -13,48 +13,55 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:cardCornerRadius="12dp"
         android:elevation="10dp"
-        android:backgroundTint="@color/black"
         app:cardMaxElevation="10dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_margin="2dp"
+            android:background="@color/black">
+
 
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/imagenUsuarioTrabajos"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            app:layout_constraintHorizontal_weight="0"
             android:src="@drawable/pajaro"
             android:scaleType="fitXY"
-            android:layout_margin="10dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginStart="10dp"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/imagenItemTrabajo"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/textItemTrabajo"
-            app:shapeAppearanceOverlay="@style/Circular"/>
+            app:layout_constraintEnd_toStartOf="@id/imagenItemTrabajo"
+            app:shapeAppearanceOverlay="@style/Circular"
+            android:outlineSpotShadowColor="@color/white"
+            android:defaultFocusHighlightEnabled="true"/>
         <TextView
             android:id="@+id/textItemTrabajo"
-            app:layout_constraintHorizontal_weight="1"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:layout_constraintHorizontal_weight="1"
             android:text="@string/texto_encabezado"
             android:textColor="@color/white"
-            android:layout_marginTop="10dp"
+            android:layout_margin="15dp"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toEndOf="@id/imagenUsuarioTrabajos"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toTopOf="@id/imagenItemTrabajo"/>
         <ImageView
             android:id="@+id/imagenItemTrabajo"
-            android:layout_width="match_parent"
-            android:layout_height="300dp"
+            android:layout_width="250dp"
+            android:layout_height="200dp"
+            app:layout_constraintHorizontal_weight="0"
             android:src="@drawable/pajaro"
             android:scaleType="fitXY"
-            android:layout_marginTop="10dp"
+            android:layout_margin="15dp"
             app:layout_constraintTop_toBottomOf="@id/textItemTrabajo"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            app:layout_constraintStart_toEndOf="@id/imagenUsuarioTrabajos"
+            />
 
         <TextView
             android:id="@+id/textLike"
@@ -64,21 +71,17 @@
             android:textColor="@color/white"
             app:layout_constraintTop_toBottomOf="@id/imagenItemTrabajo"
             app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginTop="10dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginBottom="10dp"/>
+            android:layout_margin="10dp"/>
 
         <TextView
             android:id="@+id/textComentarios"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="comentar"
+            android:text="comentarios"
             android:textColor="@color/white"
             app:layout_constraintStart_toEndOf="@id/textLike"
             app:layout_constraintTop_toBottomOf="@id/imagenItemTrabajo"
-            android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
 
             />
 

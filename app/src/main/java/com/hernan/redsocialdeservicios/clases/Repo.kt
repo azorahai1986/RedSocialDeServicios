@@ -1,122 +1,51 @@
 package com.hernan.redsocialdeservicios.clases
 
 import android.util.Log
-import androidx.fragment.app.FragmentActivity
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import com.google.firebase.firestore.DocumentSnapshot
-import com.google.firebase.firestore.FirebaseFirestore
-import com.hernan.redsocialdeservicios.murogeneral.AdapterComentarios
+import com.google.firebase.firestore.DocumentChange
+import com.google.firebase.firestore.ListenerRegistration
 import com.hernan.redsocialdeservicios.murogeneral.ModeloCmentarios
-import com.hernan.redsocialdeservicios.murogeneral.clases.SnapshotActializar
-import com.hernan.redsocialdeservicios.murogeneral.comentariosFragment
-import com.hernan.redsocialdeservicios.trabajosdeusuario.ModeloTrabajos
+import com.hernan.redsocialdeservicios.murogeneral.clases_comentarios.ResultComentarios
+import com.hernan.redsocialdeservicios.murogeneral.clases_comentarios.getFirestoreComentarios
+import kotlinx.coroutines.channels.awaitClose
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.channelFlow
+import kotlinx.coroutines.launch
 
-class repo: SnapshotActializar {
-    fun getUserData(idUsuario: String): LiveData<MutableList<ModeloTrabajos>> {
-        /*
-        crearé una variable para enviar el precio a la clase AplicarPorcentajesPrecios
-         */
-        Log.e("idRepo", idUsuario.toString())
+class repo {
 
-        val mutableData = MutableLiveData<MutableList<ModeloTrabajos>>()
-        FirebaseFirestore.getInstance().collection("TrabajosDelUsusario").whereEqualTo("id", idUsuario)
-            .get().addOnSuccessListener {
-                //Log.e("idRepo2", idUsuario.toString())
-
-                val listData = mutableListOf<ModeloTrabajos>()
-                //Log.e("datosFirebase", listData.toString())
-
-                for (obtenerFireBase in it.documents){
-                    val indument = obtenerFireBase.toObject(ModeloTrabajos::class.java)
-
-                    indument?.id = obtenerFireBase.id
-                    if (indument != null)
-
-                        listData.add(indument)
-                   // Log.e("datosFirebase", indument.toString())
-
+        var listener: ListenerRegistration? = null
+        suspend fun getComentarios(idDocument: String?): Flow<ResultComentarios<ModeloCmentarios>> = channelFlow {
+            listener = getFirestoreComentarios(idDocument).addSnapshotListener { value, error ->
+                if (error != null) {
+                    launch {
+                        send(ResultComentarios.Error(error))
+                    }
+                    Log.e("PruebaListError", error.toString())
+                    return@addSnapshotListener
                 }
-                mutableData.value = listData
+                value?.documentChanges?.forEach {
 
-                //Log.e("datosFirebase", listData.toString())
-
-            }.addOnFailureListener {
-                Log.e("ErrorMODELO", it.toString())
-                //Esto lo hice para probar si llega internet a la app.
-            }
-        return mutableData
-    }
-
-
-    fun getUserDataMural(): LiveData<MutableList<ModeloTrabajos>> {
-        /*
-        crearé una variable para enviar el precio a la clase AplicarPorcentajesPrecios
-         */
-
-        val mutableData = MutableLiveData<MutableList<ModeloTrabajos>>()
-        FirebaseFirestore.getInstance().collection("TrabajosDelUsusario")
-            .get().addOnSuccessListener {
-                //Log.e("idRepo2", idUsuario.toString())
-
-                val listData = mutableListOf<ModeloTrabajos>()
-                //Log.e("datosFirebase", listData.toString())
-
-                for (obtenerFireBase in it.documents){
-                    val indument = obtenerFireBase.toObject(ModeloTrabajos::class.java)
-
-                    indument?.id = obtenerFireBase.id
-                    if (indument != null)
-
-                        listData.add(indument)
-                    // Log.e("datosFirebase", indument.toString())
-
+                    val doc = it.document.toObject(ModeloCmentarios::class.java)
+                    doc.id = it.document.id
+                    Log.e("PruebaList", doc.toString())
+                    when (it.type) {
+                        DocumentChange.Type.ADDED -> doc.type = ModeloCmentarios.TYPE.ADD
+                        DocumentChange.Type.MODIFIED -> doc.type = ModeloCmentarios.TYPE.UPDATE
+                        DocumentChange.Type.REMOVED -> doc.type = ModeloCmentarios.TYPE.REMOVE
+                    }
+                    launch {
+                        send(ResultComentarios.Success(doc))
+                    }
                 }
-                mutableData.value = listData
-
-                //Log.e("datosFirebase", listData.toString())
-
-            }.addOnFailureListener {
-                Log.e("ErrorMODELO", it.toString())
-                //Esto lo hice para probar si llega internet a la app.
             }
-        return mutableData
-    }
-    fun getComentariosData(idUsuario: String): LiveData<MutableList<ModeloCmentarios>> {
-        /*
-        crearé una variable para enviar el precio a la clase AplicarPorcentajesPrecios
-         */
-
-
-        val mutableData = MutableLiveData<MutableList<ModeloCmentarios>>()
-        FirebaseFirestore.getInstance().collection("comentariosLikes").whereEqualTo("idDoc", idUsuario)
-            .get().addOnSuccessListener {
-                //Log.e("idRepo2", idUsuario.toString())
-
-                val listData = mutableListOf<ModeloCmentarios>()
-                //Log.e("datosFirebase", listData.toString())
-
-                for (obtenerFireBase in it.documents){
-                    val indument = obtenerFireBase.toObject(ModeloCmentarios::class.java)
-
-                    indument?.id = obtenerFireBase.id
-                    if (indument != null)
-
-                        listData.add(indument)
-                    // Log.e("datosFirebase", indument.toString())
-
-                }
-                mutableData.value = listData
-
-                //Log.e("datosFirebase", listData.toString())
-
-            }.addOnFailureListener {
-                Log.e("ErrorMODELO", it.toString())
-                //Esto lo hice para probar si llega internet a la app.
+            awaitClose {
+                listener?.remove()
             }
-        return mutableData
+        }//.flowOn(Dispatchers.IO)
 
-    }
+        fun removeListener() {
+            listener?.remove()
+        }
 
 
 }

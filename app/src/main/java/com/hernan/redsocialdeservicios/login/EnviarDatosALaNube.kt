@@ -11,8 +11,6 @@ class EnviarDatosALaNube {
         email: String,
         uid: String,
         nombreYApellido:String,
-        nombre: String,
-        apellido:String,
         fotoUsuario:String,
         edad: String,
     ) {
@@ -23,9 +21,7 @@ class EnviarDatosALaNube {
 
         user["email"] = email
         user["uid"] = uid
-        user["nombre y apellido"] = nombreYApellido
-        user["nombre"] = nombre
-        user["apellido"] = apellido
+        user["nombreYapellido"] = nombreYApellido
         user["edad"] = edad
         user["fotoUsuario"] = fotoUsuario
 

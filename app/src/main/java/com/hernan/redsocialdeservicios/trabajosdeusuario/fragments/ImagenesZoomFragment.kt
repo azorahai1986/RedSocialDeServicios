@@ -52,10 +52,15 @@ class ImagenesZoomFragment : Fragment() {
 
 
         idDoc = arguments?.getString(IDDOC)
-        initObserverrs()
         inflarRecycler()
 
+
         return binding.root
+    }
+
+    override fun onResume() {
+        super.onResume()
+        initObserverrs()
     }
 
     private fun inflarRecycler(){
@@ -102,9 +107,19 @@ class ImagenesZoomFragment : Fragment() {
     private fun initObserverrs() {
         val uid = getUser?.uid
 
-        viewModel.traRealizado.observe(viewLifecycleOwner) {
 
-            when(it.type) {
+
+        viewModel.fetchTrabajos(uid).observe(viewLifecycleOwner) {
+            adapter?.arrayMuro = it as ArrayList<ModeloTrabajos>
+            adapter?.notifyDataSetChanged()
+            Log.e("ErrorPrueba", it.toString())
+            Log.e("ErrorPrueba 2", adapter?.arrayMuro.toString())
+            if (idDoc != null){
+                val i = indexarRecycler()
+                posicionarRecycler(i, adapter?.arrayMuro)
+
+            }
+            /*when(it.type) {
                 ModeloTrabajos.TYPE.ADD -> adapter?.arrayMuro?.add(it)
                 ModeloTrabajos.TYPE.UPDATE -> {
                     val pos = adapter?.getIndex(it)
@@ -121,41 +136,40 @@ class ImagenesZoomFragment : Fragment() {
                 }
             }
             // para scrollear el recycler hasta la posicion deseada
-            if (idDoc != null){
-                val i = indexarRecycler()
-
-                if (i >- 1){
-                    Log.e("ErrorPrueba", it.toString())
-                    Log.e("ErrorPrueba", i.toString())
-
-                    binding.recyclerZoom.layoutManager?.scrollToPosition(i)
-
-
-                }
-            }
 
             adapter?.notifyDataSetChanged()
+
+
+
+
         }
         viewModel.error.observe(viewLifecycleOwner) {
-            Log.e("ErrorPrueba", it.toString())
+            Log.e("ErrorPrueba", it.toString())*/
         }
 
 
-        viewModel.getTrabajoRealizado(uid)
+        //viewModel.getTrabajoRealizado(uid)
+
 
 
 
     }
+    fun posicionarRecycler(i: Int, arrayMuro: ArrayList<ModeloTrabajos>?) {
 
-    override fun onDestroy() {
-        super.onDestroy()
-        removeObservers()
+        if (i > -1){
+            if (arrayMuro != null){
+                Log.e("ErrorPrueba 3", i.toString())
+                Log.e("ErrorPrueba 3", arrayMuro.toString())
+
+                binding.recyclerZoom.layoutManager?.scrollToPosition(i)
+            }
+
+
+
+        }
     }
-    private fun removeObservers() {
-        viewModel.traRealizado.removeObservers(this)
-        viewModel.error.removeObservers(this)
-        viewModel.removeListener()
-    }
+
+
 
 
 }

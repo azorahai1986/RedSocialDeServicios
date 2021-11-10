@@ -1,4 +1,4 @@
-package com.hernan.redsocialdeservicios.login.fragments
+package com.hernan.redsocialdeservicios.registrar_usuario.fragmentos
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -42,6 +42,7 @@ class RegistrarGoogleFragment : Fragment() {
     fun obtenerAuthUsuario(){
 
         auth = Firebase.auth
+
         val user = FirebaseAuth.getInstance().currentUser
         user?.let {
             // Name, email address, and profile photo Url
@@ -63,7 +64,12 @@ class RegistrarGoogleFragment : Fragment() {
         activity?.supportFragmentManager?.beginTransaction()?.replace(R.id.loginContenedor,
             datosPersonalesFragment)?.
         setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)?.commit()
+
+
+
+
     }
+
 
 
 

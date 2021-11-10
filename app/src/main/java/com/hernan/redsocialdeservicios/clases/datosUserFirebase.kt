@@ -11,6 +11,7 @@ val getUser = FirebaseAuth.getInstance().currentUser
 //var arrayData:ArrayList<String> = ArrayList()
 var fotoPerfilFirebase:String? = null
 var nombrePerfilFirebase:String? = null
+var idDocumentFirebase:String? = null
 lateinit var cargar: CargarTrabajoFragment
 public fun dataFirebase(){
     val uid = getUser?.uid.toString()
@@ -24,6 +25,7 @@ public fun dataFirebase(){
                     fotoPerfilFirebase = document.data["fotoUsuario"].toString()
 
                 nombrePerfilFirebase = document.data["nombreYapellido"].toString()
+                idDocumentFirebase = document.data["nombreYapellido"].toString()
 
 
 

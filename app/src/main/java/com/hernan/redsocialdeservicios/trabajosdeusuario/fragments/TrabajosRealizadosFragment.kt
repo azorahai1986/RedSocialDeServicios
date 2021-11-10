@@ -73,7 +73,7 @@ class TrabajosRealizadosFragment : Fragment() {
 
     fun inflarRecyclerViewTrabRealiz() {
 
-        layoutManager = GridLayoutManager(activity, 1)
+        layoutManager = GridLayoutManager(activity, 4)
             binding.recyclerTrabajos.layoutManager = layoutManager
             binding.recyclerTrabajos.setHasFixedSize(true)
             adapter = AdapterTrabajo(arrayListOf(), context as FragmentActivity)
@@ -124,6 +124,7 @@ class TrabajosRealizadosFragment : Fragment() {
 
         }
     }
+
     fun enlazarVistas(imagenPrincipal: String) {
 
 
@@ -174,30 +175,13 @@ class TrabajosRealizadosFragment : Fragment() {
 
     @SuppressLint("NotifyDataSetChanged")
     private fun initObserverrs() {
-      //  imagenTrabajo = imagenTrabajoFire
 
-
-
-        viewModel.traRealizado.observe(viewLifecycleOwner) {
-           // imagenTrabajo = it.imagenPrincipal
-            Log.e("PRueba", imagenTrabajo.toString())
-            enlazarVistas(it.imagenPrincipal)
-
-            when(it.type) {
-                ModeloTrabajos.TYPE.ADD -> adapter?.listTrabajo?.add(it)
-                ModeloTrabajos.TYPE.UPDATE -> {
-                    val pos = adapter?.getIndex(it)
-                    if(pos!=null && pos > -1) {
-                        adapter?.listTrabajo?.set(pos, it)
-                    }
-                }
-                ModeloTrabajos.TYPE.REMOVE -> {
-                    val pos = adapter?.getIndex(it)
-                    if(pos!=null && pos > -1) {
-                        adapter?.listTrabajo?.removeAt(pos)
-                    }
-                }
+        viewModel.fetchTrabajos(idUsuario).observe(viewLifecycleOwner) {
+            adapter?.listTrabajo = it as ArrayList<ModeloTrabajos>
+            for (i in it){
+                enlazarVistas(i.imagenPrincipal)
             }
+
             adapter?.notifyDataSetChanged()
         }
         viewModel.error.observe(viewLifecycleOwner) {

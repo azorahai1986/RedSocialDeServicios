@@ -44,7 +44,7 @@
                 android:resource="@xml/provider_paths" />
         </provider>
         <service
-            android:name=".clases_push.FirebaseService"
+            android:name=".push_notification.FirebaseService"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />

@@ -34,6 +34,7 @@
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="me_gusta">me gusta</string>
     <string name="comentar">comentar</string>
+    <string name="verificar_email">se enviará un mail a tu casilla de correo para restablecer la contraseña.  asegurate de que el mismo sea válido</string>
 
 
 </resources>

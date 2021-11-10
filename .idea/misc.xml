@@ -3,7 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/herna/AndroidStudioProjects/RedSocialDeServicios/app/src/main/res/drawable/bordes_boton.xml" value="1.4107142857142858" />
         <entry key="..\:/Users/herna/AndroidStudioProjects/RedSocialDeServicios/app/src/main/res/drawable/icon_camera.xml" value="1.542857142857143" />
+        <entry key="..\:/Users/herna/AndroidStudioProjects/RedSocialDeServicios/app/src/main/res/layout/activity_login.xml" value="0.5789473684210527" />
         <entry key="..\:/Users/herna/AndroidStudioProjects/RedSocialDeServicios/app/src/main/res/layout/activity_main.xml" value="0.5592105263157895" />
         <entry key="..\:/Users/herna/AndroidStudioProjects/RedSocialDeServicios/app/src/main/res/layout/activity_muro_general.xml" value="0.5592105263157895" />
         <entry key="..\:/Users/herna/AndroidStudioProjects/RedSocialDeServicios/app/src/main/res/layout/activity_muro_general2.xml" value="1.21875" />
@@ -15,7 +17,10 @@
         <entry key="..\:/Users/herna/AndroidStudioProjects/RedSocialDeServicios/app/src/main/res/layout/fragment_datos_personales.xml" value="0.7088815789473685" />
         <entry key="..\:/Users/herna/AndroidStudioProjects/RedSocialDeServicios/app/src/main/res/layout/fragment_editar_usuario.xml" value="1.21875" />
         <entry key="..\:/Users/herna/AndroidStudioProjects/RedSocialDeServicios/app/src/main/res/layout/fragment_imagenes_zoom.xml" value="0.5444078947368421" />
+        <entry key="..\:/Users/herna/AndroidStudioProjects/RedSocialDeServicios/app/src/main/res/layout/fragment_login.xml" value="0.5789473684210527" />
         <entry key="..\:/Users/herna/AndroidStudioProjects/RedSocialDeServicios/app/src/main/res/layout/fragment_muro_principal.xml" value="0.9269005847953217" />
+        <entry key="..\:/Users/herna/AndroidStudioProjects/RedSocialDeServicios/app/src/main/res/layout/fragment_registrar_usuario.xml" value="0.5" />
+        <entry key="..\:/Users/herna/AndroidStudioProjects/RedSocialDeServicios/app/src/main/res/layout/fragment_restablecer_pasword.xml" value="0.5" />
         <entry key="..\:/Users/herna/AndroidStudioProjects/RedSocialDeServicios/app/src/main/res/layout/fragment_trabajos_realizados.xml" value="0.28013937282229967" />
         <entry key="..\:/Users/herna/AndroidStudioProjects/RedSocialDeServicios/app/src/main/res/layout/item_comentarios.xml" value="0.5" />
         <entry key="..\:/Users/herna/AndroidStudioProjects/RedSocialDeServicios/app/src/main/res/layout/item_encabezado.xml" value="1.087171052631579" />

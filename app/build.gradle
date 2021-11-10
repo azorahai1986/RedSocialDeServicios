@@ -98,7 +98,7 @@ dependencies {
     //implementation 'com.github.MikeOrtiz:TouchImageView:1.4.1'
     implementation 'com.zolad:zoominimageview:1.0.0'
 
-    implementation 'com.google.firebase:firebase-messaging'
+    implementation 'com.google.firebase:firebase-messaging:22.0.0'
     implementation 'com.google.firebase:firebase-analytics'
 
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'

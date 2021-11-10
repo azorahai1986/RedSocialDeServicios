@@ -32,14 +32,14 @@ class FirebaseService: FirebaseMessagingService() {
             createNotificationChannel(notificationManager)
         }
 
-        intent.putExtra("idProd", message.data["idProd"])
+
+        intent.putExtra("id", message.data["id"])
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
         val pendingIntent = PendingIntent.getActivity(this, 0, intent, FLAG_ONE_SHOT)
         val notification = NotificationCompat.Builder(this, CHANNEL_ID)
             .setContentTitle(message.data["title"])
             .setContentText(message.data["message"])
-            .setSmallIcon(
-                R.drawable.icon_camera).setAutoCancel(true).setContentIntent(pendingIntent).build()
+            .setSmallIcon(R.drawable.icon_camera).setAutoCancel(true).setContentIntent(pendingIntent).build()
 
         notificationManager.notify(notificationID, notification)
 
@@ -47,6 +47,7 @@ class FirebaseService: FirebaseMessagingService() {
 
     @RequiresApi(Build.VERSION_CODES.O)
     private fun createNotificationChannel(notificationManager: NotificationManager){
+
         val channelName = "channelName"
         val channel = NotificationChannel(CHANNEL_ID, channelName, IMPORTANCE_HIGH).apply {
             description = "My channel description"

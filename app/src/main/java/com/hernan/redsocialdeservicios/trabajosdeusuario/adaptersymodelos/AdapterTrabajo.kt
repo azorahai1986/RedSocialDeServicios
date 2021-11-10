@@ -16,10 +16,6 @@ class AdapterTrabajo(var listTrabajo:ArrayList<ModeloTrabajos>, val fragment:Fra
     inner class ViewHolderTrabajo(itemView: View):RecyclerView.ViewHolder(itemView){
         val binding = ItemTrabajosUsuarioBinding.bind(itemView)
 
-
-        fun bind(trabajosRealiz: ModeloTrabajos){
-            binding.textComentarios.text =trabajosRealiz.comentario
-        }
     }
 
 
@@ -33,17 +29,10 @@ class AdapterTrabajo(var listTrabajo:ArrayList<ModeloTrabajos>, val fragment:Fra
     override fun onBindViewHolder(holder: ViewHolderTrabajo, position: Int) {
         val trabajosList = listTrabajo[position]
 
-
-
-        holder.binding.textItemTrabajo.text = trabajosList.enunciado
-        holder.binding.textComentarios.text = trabajosList.comentario
-        holder.binding.textLike.text = trabajosList.like + "Me gusta"
         Glide.with(fragment).load(trabajosList.imagenPrincipal).into(holder.binding.imagenItemTrabajo)
         Glide.with(fragment).load(trabajosList.imagenUsuario).into(holder.binding.imagenUsuarioTrabajos)
-        var posicion = holder.absoluteAdapterPosition
 
-        holder.binding.imagenItemTrabajo.setOnClickListener { irFragmentZoom(trabajosList.id, posicion) }
-        holder.bind(trabajosList)
+        holder.binding.imagenItemTrabajo.setOnClickListener { irFragmentZoom(trabajosList.id) }
     }
     fun getIndex(trabajosRealiz: ModeloTrabajos): Int {
         var index = -1
@@ -57,13 +46,11 @@ class AdapterTrabajo(var listTrabajo:ArrayList<ModeloTrabajos>, val fragment:Fra
         return index
     }
 
-    fun irFragmentZoom(id: String, posicion: Int) {
-       // Log.e("IMAGENES PAGER adapterrrrr", id.toString())
+    fun irFragmentZoom(id: String) {
 
-        val fragZoom = ImagenesZoomFragment()
         fragment.supportFragmentManager.beginTransaction().replace(R.id.trabajosContenedor,
             ImagenesZoomFragment.newInstance(id))
-            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN).addToBackStack(null).commit()
+            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN).addToBackStack("imagenes").commit()
     }
 
 

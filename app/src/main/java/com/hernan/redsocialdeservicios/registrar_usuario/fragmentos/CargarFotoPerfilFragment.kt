@@ -1,4 +1,4 @@
-package com.hernan.redsocialdeservicios.login.fragments
+package com.hernan.redsocialdeservicios.registrar_usuario.fragmentos
 
 import android.app.Activity.RESULT_OK
 import android.app.ProgressDialog
@@ -21,13 +21,14 @@ import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import com.google.firebase.storage.ktx.storage
+import com.hernan.redsocialdeservicios.authRecibido
 import com.hernan.redsocialdeservicios.databinding.FragmentCargarFotoPerfilBinding
 import com.hernan.redsocialdeservicios.murogeneral.MuroGeneralActivity
+import com.hernan.redsocialdeservicios.onbtenerUser
 import java.util.*
 
 
 class CargarFotoPerfilFragment : Fragment() {
-
 
     private lateinit var binding: FragmentCargarFotoPerfilBinding
     private val REQUEST_CAMERA = 1002
@@ -39,7 +40,8 @@ class CargarFotoPerfilFragment : Fragment() {
     lateinit var storage: FirebaseStorage
     lateinit var db: FirebaseFirestore
 
-    val getUser = FirebaseAuth.getInstance().currentUser
+    private val getUser = FirebaseAuth.getInstance().currentUser
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -49,12 +51,14 @@ class CargarFotoPerfilFragment : Fragment() {
         storage = Firebase.storage
         storage = FirebaseStorage.getInstance()
         storageReference = storage!!.reference
-        //abreCamara_click()
+
+
         db = FirebaseFirestore.getInstance()
         Toast.makeText(context, "toca la imagen para acceder a la galeria", Toast.LENGTH_LONG).show()
         binding.imagenFoto.setOnClickListener {abreCamara_click()}
-        binding.btCargarFoto.setOnClickListener {uploadFile()}
+        binding.btCargarFoto.setOnClickListener {uploadFile() }
         binding.imagenGaleria.setOnClickListener { showFilerChooser() }
+
         return binding.root
     }
 
@@ -111,19 +115,24 @@ class CargarFotoPerfilFragment : Fragment() {
 
     }
 
-
     fun uploadFile() {
+        onbtenerUser()
+        Log.e("AUTH RECIBIDO FOTO", authRecibido.toString())
         var idDoc = ""
+
         if (foto != null) {
             val progressDialog = ProgressDialog(requireContext())
             progressDialog.setTitle("Cargando...")
             progressDialog.show()
 
-            val uid = getUser?.uid
-            db.collection("DatosDeUsuarios").whereEqualTo("uid", uid).get()
+
+            db.collection("DatosDeUsuarios").whereEqualTo("uid", authRecibido.toString()).get()
                 .addOnSuccessListener { documents ->
                     for (document in documents) {
                         idDoc = document.id
+                        Log.e("id DOC", idDoc.toString())
+
+
                     }
                 }
                 .addOnFailureListener { exception ->
@@ -149,20 +158,21 @@ class CargarFotoPerfilFragment : Fragment() {
 
                     var imagen = downloadUri.toString()
 
+
                     var map = mutableMapOf<String, Any>()
+
                     map["fotoUsuario"] = imagen
 
-                    val editar = FirebaseFirestore.getInstance().collection("DatosDeUsuarios")
+                   val enviarFotoFirebase = FirebaseFirestore.getInstance().collection("DatosDeUsuarios")
                         .document(idDoc)
-                    editar.update(map)
+                    enviarFotoFirebase.update(map)
                         .addOnSuccessListener {
                             Toast.makeText(context, "Usuario registrado con exito", Toast.LENGTH_SHORT) .show()
-                            /*activity?.supportFragmentManager?.beginTransaction()?.replace(R.id.loginContenedor,
-                                MuroPrincipalFragment())?.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)?.commit()*/
                             val intent = Intent(context, MuroGeneralActivity::class.java)
                             startActivity(intent)
 
                             progressDialog.dismiss()
+                            activity?.finish()
                         }.addOnFailureListener {
                             Toast.makeText(context, "Falló Modificación", Toast.LENGTH_SHORT).show()
 
@@ -177,11 +187,13 @@ class CargarFotoPerfilFragment : Fragment() {
 
 
     }
+
     private fun showFilerChooser() {
         val intent = Intent()
         intent.type = "image/*"
         intent.action = Intent.ACTION_GET_CONTENT
         startActivityForResult(Intent.createChooser(intent, "SELECT PICTURE"), PICK_IMAGE_REQUEST)
     }
+
 
 }

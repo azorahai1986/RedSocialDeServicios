@@ -3,7 +3,7 @@ package com.hernan.redsocialdeservicios.push_notification
 class Constantes {
     companion object{
         const val BASE_URL = "https://fcm.googleapis.com"
-        const val SERVER_KEY = "AAAAkLkc95Y:APA91bEZCsSlcqfOT9Lr3nlFoQsKFKEfP9E3SdEH4h_FcsoPGyySZNwu0aFhiRQRZzh58uPlgs7FKbfGl-iu2W4j7g3l3sPZJzxzFiJZITgApj6dF-2QT-evFqScP18JBy7vgTxSQ9nE"
+        const val SERVER_KEY = "AAAAkPhQEa0:APA91bEVQ54Rh0QJUAtxIuaymddsnFp1uoUDeX3HW1fPHuDSlYL62AIczWYj_ubkYzfzmY3VzTa47dMJJfgUba2K4Xe8H9tkrXJHpjLfZkMdAn41nrziT1uKE4r_yhT5G3Jk9xyZCFwg"
         const val CONTENT_TYPE = "application/json"
     }
 }

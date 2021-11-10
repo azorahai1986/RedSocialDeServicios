@@ -2,6 +2,7 @@ package com.hernan.redsocialdeservicios.trabajosdeusuario.fragments
 
 import android.app.Activity
 import android.app.ProgressDialog
+import android.content.ContentValues.TAG
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -12,21 +13,32 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.FragmentTransaction
+import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.messaging.FirebaseMessaging
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import com.google.firebase.storage.ktx.storage
+import com.google.gson.Gson
 import com.hernan.redsocialdeservicios.R
 import com.hernan.redsocialdeservicios.clases.dataFirebase
 import com.hernan.redsocialdeservicios.clases.fotoPerfilFirebase
 import com.hernan.redsocialdeservicios.clases.nombrePerfilFirebase
 import com.hernan.redsocialdeservicios.databinding.FragmentCargarTrabajoBinding
+import com.hernan.redsocialdeservicios.push_notification.NotificationData
+import com.hernan.redsocialdeservicios.push_notification.PushNotification
+import com.hernan.redsocialdeservicios.push_notification.Retrofitinstance
 import com.hernan.redsocialdeservicios.trabajosdeusuario.adaptersymodelos.AdapterViewPagerTrabajos
 import kotlinx.android.synthetic.main.toolbar_trabajos_usuario.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.util.*
 
+const val TOPIC = "/topics/general"
 
 class CargarTrabajoFragment : Fragment() {
 
@@ -53,12 +65,12 @@ class CargarTrabajoFragment : Fragment() {
         storage = FirebaseStorage.getInstance()
         storageReference = storage!!.reference
         adapterImagenes = AdapterViewPagerTrabajos(arrayListOf())
-
+        FirebaseMessaging.getInstance().subscribeToTopic(TOPIC)
         dataFirebase()
 
 
         showFilerChooser()
-        binding.btPublicar.setOnClickListener { uploadFile() }
+        binding.btPublicar.setOnClickListener {uploadFile()}
         activity?.iconCargarTrabajos?.setOnClickListener { cargarActividad() }
 
 
@@ -69,6 +81,7 @@ class CargarTrabajoFragment : Fragment() {
 
     private fun uploadImage(pos: Int){
 
+
         if(pos == arrayImagePath.size) {
 
 
@@ -77,7 +90,6 @@ class CargarTrabajoFragment : Fragment() {
             var imagenPrincipal = if(arrayURLs.isEmpty()) "" else arrayURLs[0]
             var enunciado = binding.etCargarTrabajo.text.toString()
             imagenUs = fotoPerfilFirebase.toString()
-            Log.e("FOTO USUARIO", imagenUs.toString())
 
 
             var map = mutableMapOf<String, Any>()
@@ -91,6 +103,7 @@ class CargarTrabajoFragment : Fragment() {
 
             FirebaseFirestore.getInstance().collection("TrabajosDelUsusario")
                 .document().set(map)
+            lanzarPush(id)
             activity?.finish()
 
         }else{
@@ -222,6 +235,45 @@ class CargarTrabajoFragment : Fragment() {
         val cargarActividad = CargarTrabajoFragment()
         activity?.supportFragmentManager?.beginTransaction()?.replace(R.id.trabajosContenedor, cargarActividad)?.
         setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)?.commit()
+    }
+
+    private fun sendNotification(notification: PushNotification) =
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                val response = Retrofitinstance.api.postNotification(notification)
+                if (response.isSuccessful) {
+                    Log.e(TAG, "response: ${Gson().toJson(response)} ")
+                } else {
+                    Log.e(TAG, response.errorBody().toString())
+
+                }
+
+                withContext(Dispatchers.Main){
+                    activity?.finish()
+                }
+            } catch (e: Exception) {
+                withContext(Dispatchers.Main){
+                    activity?.finish()
+                }
+            }
+
+
+        }
+
+    fun lanzarPush(id:String) {
+
+        val title = nombrePerfilFirebase.toString()
+        val message = "publicó un nuevo servicio"
+        if (title.isNotEmpty() && message.isNotEmpty()) {
+            PushNotification(
+                NotificationData(title, message, id),
+                TOPIC
+            ).also {
+                sendNotification(it)
+
+            }
+        }
+
     }
 
 

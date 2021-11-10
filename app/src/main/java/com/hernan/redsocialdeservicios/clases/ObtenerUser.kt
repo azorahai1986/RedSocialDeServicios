@@ -7,12 +7,12 @@ import com.google.firebase.ktx.Firebase
 private var emailRecibido: String? = null
 private var nombreRecibido: String? = null
 private var fotoRecibida: String? = null
-private var authRecibido: String? = null
+var authRecibido: String? = null
 private lateinit var auth: FirebaseAuth
 
 fun onbtenerUser(){
     auth = Firebase.auth
-    val user = FirebaseAuth.getInstance().currentUser
+    val user = auth.currentUser
     user?.let {
         // Name, email address, and profile photo Url
         emailRecibido = user.email

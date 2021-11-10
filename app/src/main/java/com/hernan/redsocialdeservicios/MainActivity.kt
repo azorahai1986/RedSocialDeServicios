@@ -65,9 +65,6 @@ class MainActivity:AppCompatActivity() {
             startActivity(intent)
         }
 
-        Log.e("EMAIL_MAIN", emailObtenido.toString())
-        Log.e("ID_MAIN", uidObtenido.toString())
-        Log.e("ID_FOTO", imagenObtenido.toString())
     }
 
 

@@ -20,9 +20,10 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.hernan.redsocialdeservicios.R
 import com.hernan.redsocialdeservicios.databinding.FragmentLoginBinding
-import com.hernan.redsocialdeservicios.login.fragments.RegistrarGoogleFragment
-import com.hernan.redsocialdeservicios.login.fragments.RegistrarUsuarioFragment
-import com.hernan.redsocialdeservicios.trabajosdeusuario.TrabajosDelUsuarioActivity
+import com.hernan.redsocialdeservicios.registrar_usuario.fragmentos.RegistrarGoogleFragment
+import com.hernan.redsocialdeservicios.registrar_usuario.fragmentos.RegistrarUsuarioFragment
+import com.hernan.redsocialdeservicios.login.fragments.RestablecerPaswordFragment
+import com.hernan.redsocialdeservicios.murogeneral.MuroGeneralActivity
 import java.util.regex.Pattern
 
 
@@ -40,6 +41,7 @@ class LoginFragment : Fragment() {
     //para entrar con google.............
     private val GOOGLE_SIGN_IN = 100
     private lateinit var auth: FirebaseAuth
+
 
 
     // calbackManager es una clase de facebook.............
@@ -65,6 +67,7 @@ class LoginFragment : Fragment() {
             }
 
         }
+        binding.textPasswordRecovery.setOnClickListener { irAValidarPasword() }
 
 
         return binding.root
@@ -77,7 +80,7 @@ class LoginFragment : Fragment() {
             .addOnCompleteListener {
                 if (it.isSuccessful){
 
-                    val intent = Intent(context, TrabajosDelUsuarioActivity::class.java)
+                    val intent = Intent(context, MuroGeneralActivity::class.java)
                     intent.putExtra("EMAIL", it.result?.user?.email)
                     intent.putExtra("IDUSUARIO", it.result?.user?.uid)
                     startActivity(intent)
@@ -98,6 +101,10 @@ class LoginFragment : Fragment() {
         activity?.supportFragmentManager?.beginTransaction()?.replace(R.id.loginContenedor, RegistrarUsuarioFragment())
             ?.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)?.commit()
     }
+    fun irAValidarPasword(){
+        activity?.supportFragmentManager?.beginTransaction()?.replace(R.id.loginContenedor, RestablecerPaswordFragment())
+            ?.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)?.addToBackStack(null)?.commit()
+    }
 
     private fun validate(etEmail: Editable, etPassword: Editable) {
         val result = arrayOf(validarEmail(), validarPassword())
@@ -106,7 +113,7 @@ class LoginFragment : Fragment() {
             Toast.makeText(context, "ingrese patrones requeridos", Toast.LENGTH_SHORT).show()
 
         }else{
-            Toast.makeText(context, "Succes", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, "Perfecto", Toast.LENGTH_SHORT).show()
             ingresarUs(etEmail, etPassword)
         }
 

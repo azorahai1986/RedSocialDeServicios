@@ -1,4 +1,4 @@
-package com.matdev.firestoreflowexample.model.firebase
+package com.hernan.redsocialdeservicios.trabajosdeusuario.clases_trabajos_realizados
 
 import com.google.firebase.firestore.FirebaseFirestore
 

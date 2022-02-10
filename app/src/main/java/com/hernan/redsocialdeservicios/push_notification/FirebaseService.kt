@@ -1,5 +1,6 @@
 package com.hernan.redsocialdeservicios.push_notification
 
+import android.annotation.SuppressLint
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.NotificationManager.IMPORTANCE_HIGH
@@ -9,17 +10,23 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.os.Build
+import android.widget.RemoteViews
 import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
+import com.hernan.redsocialdeservicios.MainActivity
 import com.hernan.redsocialdeservicios.R
 import com.hernan.redsocialdeservicios.murogeneral.MuroGeneralActivity
+import java.nio.file.attribute.AclEntry
 import kotlin.random.Random
 
 
 private const val CHANNEL_ID = "my_channel"
+private const val CHANNEL_NAME = "com.hernan.redsocialdeservicios.push_notification"
 class FirebaseService: FirebaseMessagingService() {
+
+
 
     override fun onMessageReceived(message: RemoteMessage) {
         super.onMessageReceived(message)

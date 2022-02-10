@@ -1,5 +1,6 @@
 package com.hernan.redsocialdeservicios.murogeneral
 
+import android.app.AlertDialog
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,6 +12,7 @@ import com.bumptech.glide.Glide
 import com.hernan.redsocialdeservicios.R
 import com.hernan.redsocialdeservicios.databinding.ItemMuroPrincipalBinding
 import com.hernan.redsocialdeservicios.trabajosdeusuario.adaptersymodelos.ModeloTrabajos
+import kotlinx.android.synthetic.main.dialog_cargar_imagen.view.*
 
 class AdapterMuroPrincipal(var arrayMuro:ArrayList<ModeloTrabajos>, val fragment: FragmentActivity):RecyclerView
 .Adapter<AdapterMuroPrincipal.ViewHolderMuro>() {
@@ -64,6 +66,16 @@ class AdapterMuroPrincipal(var arrayMuro:ArrayList<ModeloTrabajos>, val fragment
             }
         }
         return index
+
+    }
+
+    fun dial(){
+        val view = LayoutInflater.from(fragment).inflate(R.layout.dialog_cargar_imagen, null)
+
+        val builder =AlertDialog.Builder(fragment).setView(view)
+        builder.create()
+
+
 
     }
 

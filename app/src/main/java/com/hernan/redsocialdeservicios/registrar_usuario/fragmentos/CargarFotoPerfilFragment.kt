@@ -22,6 +22,8 @@ import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import com.google.firebase.storage.ktx.storage
 import com.hernan.redsocialdeservicios.authRecibido
+import com.hernan.redsocialdeservicios.clases.dataFirebase
+import com.hernan.redsocialdeservicios.clases.nombrePerfilFirebase
 import com.hernan.redsocialdeservicios.databinding.FragmentCargarFotoPerfilBinding
 import com.hernan.redsocialdeservicios.murogeneral.MuroGeneralActivity
 import com.hernan.redsocialdeservicios.onbtenerUser
@@ -38,8 +40,7 @@ class CargarFotoPerfilFragment : Fragment() {
 
     private var storageReference: StorageReference? = null
     lateinit var storage: FirebaseStorage
-    lateinit var db: FirebaseFirestore
-
+    var db = FirebaseFirestore.getInstance()
     private val getUser = FirebaseAuth.getInstance().currentUser
 
 
@@ -53,7 +54,7 @@ class CargarFotoPerfilFragment : Fragment() {
         storageReference = storage!!.reference
 
 
-        db = FirebaseFirestore.getInstance()
+        //db = FirebaseFirestore.getInstance()
         Toast.makeText(context, "toca la imagen para acceder a la galeria", Toast.LENGTH_LONG).show()
         binding.imagenFoto.setOnClickListener {abreCamara_click()}
         binding.btCargarFoto.setOnClickListener {uploadFile() }
@@ -194,6 +195,7 @@ class CargarFotoPerfilFragment : Fragment() {
         intent.action = Intent.ACTION_GET_CONTENT
         startActivityForResult(Intent.createChooser(intent, "SELECT PICTURE"), PICK_IMAGE_REQUEST)
     }
+
 
 
 }

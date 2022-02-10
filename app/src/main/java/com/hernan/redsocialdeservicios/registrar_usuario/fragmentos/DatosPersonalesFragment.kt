@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.FragmentTransaction
 import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
@@ -27,7 +28,7 @@ class DatosPersonalesFragment : Fragment() {
     private var email: String? = null
     private var pasword: String? = null
     private var edad: String? = null
-    private lateinit var auth: FirebaseAuth
+    private val auth: FirebaseAuth by lazy { FirebaseAuth.getInstance() }
     private val getUser = FirebaseAuth.getInstance().currentUser
     var uidRecuperado:String? = null
     var nombreRecuperado:String? = null
@@ -51,11 +52,12 @@ class DatosPersonalesFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentDatosPersonalesBinding.inflate(inflater, container, false)
-        auth = Firebase.auth
         asociarInterface()
 
+
         binding.btFinalizar.setOnClickListener {
-            irAlSiguienteActivity()
+            validarEmail()
+            //irAlSiguienteActivity()
         }
 
 
@@ -103,6 +105,24 @@ class DatosPersonalesFragment : Fragment() {
 
             }, getDate.get(Calendar.YEAR), getDate.get(Calendar.MONTH), getDate.get(Calendar.DAY_OF_MONTH))
         datePicker.show()
+    }
+    fun validarEmail(){
+        auth.signInWithEmailAndPassword(email.toString(), pasword.toString()).addOnCompleteListener { task ->
+            if (task.isSuccessful){
+
+                if (auth.currentUser!!.isEmailVerified){
+                    Toast.makeText(context, "email verificado", Toast.LENGTH_SHORT).show()
+                    irAlSiguienteActivity()
+                }
+                else{
+                    Toast.makeText(context, "debe verificar email desde la casilla de correo", Toast.LENGTH_SHORT).show()
+
+                }
+            }else{
+                Toast.makeText(context, "email no se pudo verifiar", Toast.LENGTH_SHORT).show()
+
+            }
+        }
     }
 
     fun irAlSiguienteActivity() {
@@ -159,6 +179,8 @@ class DatosPersonalesFragment : Fragment() {
                 }
             }
     }
+
+
 
 
 }

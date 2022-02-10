@@ -19,6 +19,7 @@ import com.hernan.redsocialdeservicios.murogeneral.clasesmuro.MuroViewModel
 import com.hernan.redsocialdeservicios.murogeneral.encabezado.adapters_y_modelos.ModeloEncabezado
 import com.hernan.redsocialdeservicios.murogeneral.encabezado.firebase.EncabezadoViewModel
 import com.hernan.redsocialdeservicios.trabajosdeusuario.adaptersymodelos.ModeloTrabajos
+import java.util.*
 
 
 class MuroPrincipalFragment : Fragment() {
@@ -51,6 +52,7 @@ class MuroPrincipalFragment : Fragment() {
         adapter = AdapterMuroPrincipal(arrayListOf(), context as FragmentActivity)
         binding.recyclerMuroPrincipal.adapter = adapter
 
+
     }
 
     private fun inflarRecyclerEncabezado(){
@@ -77,6 +79,7 @@ class MuroPrincipalFragment : Fragment() {
                     val pos = adapter?.getIndex(it)
                     if(pos!=null && pos > -1) {
                         adapter?.arrayMuro?.set(pos, it)
+
                     }
                 }
                 ModeloTrabajos.TYPE.REMOVE -> {

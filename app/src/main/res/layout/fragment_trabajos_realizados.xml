@@ -28,7 +28,7 @@
                     android:id="@+id/ImagenUsuario"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
-                    android:src="@drawable/camara"
+                    android:src="@color/black"
                     app:shapeAppearance="@style/Circular"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"

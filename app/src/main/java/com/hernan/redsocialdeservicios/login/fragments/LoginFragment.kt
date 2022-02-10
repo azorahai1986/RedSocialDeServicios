@@ -19,6 +19,9 @@ import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.hernan.redsocialdeservicios.R
+import com.hernan.redsocialdeservicios.clases.clase_registrar.isValidEmail
+import com.hernan.redsocialdeservicios.clases.clase_registrar.isValidPassword
+import com.hernan.redsocialdeservicios.clases.clase_registrar.validater
 import com.hernan.redsocialdeservicios.databinding.FragmentLoginBinding
 import com.hernan.redsocialdeservicios.registrar_usuario.fragmentos.RegistrarGoogleFragment
 import com.hernan.redsocialdeservicios.registrar_usuario.fragmentos.RegistrarUsuarioFragment
@@ -31,13 +34,9 @@ enum class ProviderType{
     GOOGLE,
     FACEBOOK
 }
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
 
 class LoginFragment : Fragment() {
-    private var param1: String? = null
-    private var param2: String? = null
+
     //para entrar con google.............
     private val GOOGLE_SIGN_IN = 100
     private lateinit var auth: FirebaseAuth
@@ -58,27 +57,40 @@ class LoginFragment : Fragment() {
 
         binding.cardViewRegistrarse.setOnClickListener { fragmentRegistrarse() }
         binding.cardViewGoogle.setOnClickListener { ingresarconGoogle() }
+
+
+
+        binding.textPasswordRecovery.setOnClickListener { irAValidarPasword() }
+        binding.etEmail.validater {
+            binding.etEmail.error = if (isValidEmail(it)) null else "el mail no es valido"
+        }
+        binding.etPassword.validater {
+            binding.etPassword.error = if (isValidPassword(it)) null else "debe haber por lo menos una mayuscula, un numero"
+        }
         binding.btAcceder.setOnClickListener {
-            if (!binding.etEmail.text.isNullOrEmpty() && !binding.etPassword.text.isNullOrEmpty()){
-                validate(binding.etEmail.text, binding.etPassword.text)
+
+            if (isValidEmail(binding.etEmail.text.toString()) && isValidPassword(binding.etPassword.text.toString())){
+                ingresarUs(binding.etEmail.text.toString(), binding.etPassword.text.toString())
 
             }else{
-                Toast.makeText(context, "ingresa un mail y contraseña", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "verifia que los datos sean correctos", Toast.LENGTH_SHORT).show()
             }
 
-        }
-        binding.textPasswordRecovery.setOnClickListener { irAValidarPasword() }
 
+        }
 
         return binding.root
     }
 
-    fun ingresarUs(etEmail: Editable, etPassword: Editable) {
+    fun ingresarUs(etEmail: String, etPassword:String) {
 
         FirebaseAuth.getInstance()
             .signInWithEmailAndPassword(etEmail.toString(), etPassword.toString())
             .addOnCompleteListener {
                 if (it.isSuccessful){
+                    if (auth.currentUser!!.isEmailVerified){
+
+                    }
 
                     val intent = Intent(context, MuroGeneralActivity::class.java)
                     intent.putExtra("EMAIL", it.result?.user?.email)
@@ -106,57 +118,7 @@ class LoginFragment : Fragment() {
             ?.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)?.addToBackStack(null)?.commit()
     }
 
-    private fun validate(etEmail: Editable, etPassword: Editable) {
-        val result = arrayOf(validarEmail(), validarPassword())
-        if (false in result){
-            return
-            Toast.makeText(context, "ingrese patrones requeridos", Toast.LENGTH_SHORT).show()
 
-        }else{
-            Toast.makeText(context, "Perfecto", Toast.LENGTH_SHORT).show()
-            ingresarUs(etEmail, etPassword)
-        }
-
-
-    }
-    private fun validarEmail():Boolean{
-
-        val validEmail = binding.etEmail.text.toString()
-        return if (validEmail.isEmpty()) {
-            binding.etEmail.error = "campo vacio. ingrese un email"
-            false
-        } else if (!PatternsCompat.EMAIL_ADDRESS.matcher(validEmail).matches()) {
-            binding.etEmail.error = "Ingrese un email valido"
-            false
-        } else {
-            binding.etEmail.error = null
-            true
-        }
-
-    }
-    private fun validarPassword():Boolean{
-        val password = binding.etPassword.text.toString()
-        val passwordRegex = Pattern.compile(
-            "^"+
-                    "(?=.*[0-9])"+
-                    "(?=.*[a-z])"+
-                    "(?=.*[A-Z])"+
-                    "(?=\\S+$)"+
-                    ".{4,}"+
-                    "$"
-        )
-
-        return if (password.isEmpty()) {
-            binding.etPassword.error = "campo vacio. ingrese una contraseña"
-            false
-        } else if (!passwordRegex.matcher(password).matches()) {
-            binding.etPassword.error = "la contraseña no es valida"
-            false
-        } else {
-            binding.etPassword.error = null
-            true
-        }
-    }
 
     fun ingresarconGoogle(){
         val googleConfig = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)

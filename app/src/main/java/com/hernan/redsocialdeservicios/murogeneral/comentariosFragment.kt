@@ -133,7 +133,7 @@ class comentariosFragment : Fragment() {
             }
             adapter?.notifyDataSetChanged()
         }
-        viewModel.error.observe(viewLifecycleOwner) {
+            viewModel.error.observe(viewLifecycleOwner) {
             Log.e("ErrorPrueba", it.toString())
         }
 
